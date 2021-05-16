@@ -24,9 +24,6 @@
           </el-menu-item>
         </el-submenu>
         <el-menu-item index="/archive">归档</el-menu-item>
-        <!--<el-menu-item index="/moment">动态</el-menu-item>-->
-        <!--<el-menu-item index="/friends">友情链接</el-menu-item>-->
-        <!--<el-menu-item index="/about">关于我</el-menu-item>-->
       </el-menu>
     </div>
     <div id="banner" class="home-banner">
@@ -35,20 +32,6 @@
         v-bind:style="{backgroundImage:'url(' +siteInfo.backgroundImage + ')'}"
       >
         <template>
-          <!--博主信息-->
-          <!--<div class="focusinfo">-->
-          <!--  &lt;!&ndash; 头像 &ndash;&gt;-->
-          <!--  <div class="header-tou">-->
-          <!--    <a target="_blank" :href="siteInfo.loginUrl">-->
-          <!--      <img :src="siteInfo.headAvatar" />-->
-          <!--    </a>-->
-          <!--  </div>-->
-          <!--  &lt;!&ndash; 简介 &ndash;&gt;-->
-          <!--  <div class="header-info">-->
-          <!--    <p>{{siteInfo.headInfo}}</p>-->
-          <!--  </div>-->
-
-          <!--</div>-->
           <!--左右倾斜-->
           <div class="slant-left"></div>
           <div class="slant-right"></div>

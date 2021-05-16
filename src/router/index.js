@@ -5,9 +5,6 @@ import Home from '../views/Home.vue'
 import Archive from '../views/Archive.vue'
 import Article from '../views/Article.vue'
 import BlogsByParams from '../components/BlogsByTagCate.vue'
-import friends from '../views/Friends.vue'
-import about from '../views/About.vue'
-import Moment from '../views/Moment.vue'
 
 Vue.use(VueRouter)
 
@@ -36,14 +33,6 @@ const routes = [
     }
   },
   {
-    path: '/moment',
-    name: 'moment',
-    component: Moment,
-    meta: {
-      title: '动态说说'
-    }
-  },
-  {
     path: '/article/:blogId',
     name: 'article',
     component: Article,
@@ -59,22 +48,6 @@ const routes = [
       title: '文章'
     }
   },
-  {
-    path: '/friends',
-    name: 'friends',
-    component: friends,
-    meta: {
-      title: '友情链接'
-    }
-  },
-  {
-    path: '/about',
-    name: 'about',
-    component: about,
-    meta: {
-      title: '关于我'
-    }
-  }
 ]
 
 const router = new VueRouter({

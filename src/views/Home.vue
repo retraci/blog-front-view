@@ -46,23 +46,6 @@
                   <i class="el-icon-folder-opened"></i>
                   <span href class="article-meta__categories">{{blog.cateGory.category_name}}</span>
                 </span>
-                <!--<span class="article-meta">-->
-                <!--  <span class="article-meta__separator">|</span>-->
-                <!--  <i class="el-icon-view"></i>-->
-                <!--  <span class="valine-comment-count">阅读量：{{blog.blog_visits}}</span>-->
-                <!--</span>-->
-
-                <!--<span class="article-meta">-->
-                <!--  <span class="article-meta__separator">|</span>-->
-                <!--  <i class="el-icon-chat-dot-round"></i>-->
-                <!--  <span class="valine-comment-count">{{blog.comment_cnt}}</span>-->
-                <!--  <span class="article-meta-label">条评论</span>-->
-                <!--</span>-->
-                <!--<span class="article-meta">-->
-                <!--  <span class="article-meta__separator">|</span>-->
-                <!--  <img class="love-icon" src="../assets/love.png" alt="">-->
-                <!--  <span class="valine-comment-count">点赞量：{{blog.blog_like}}</span>-->
-                <!--</span>-->
               </div>
               <div class="content">{{blog.blog_summary}}</div>
             </div>

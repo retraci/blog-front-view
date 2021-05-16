@@ -15,78 +15,13 @@
                   发表于：
                   <span>{{blog.create_time}}</span>
                 </span>
-                <!--<span class="article-views">-->
-                <!--  <i class="el-icon-view"></i>-->
-                <!--  阅读量：-->
-                <!--  <span>{{blog.blog_visits}}</span>-->
-                <!--</span>-->
-                <!--<span class="article-views">-->
-                <!--  <img class="love-icon" src="../assets/love2.png" alt />-->
-                <!--  点赞数：-->
-                <!--  <span>{{blog.blog_like}}</span>-->
-                <!--</span>-->
-                <!--<span class="article-views">-->
-                <!--  <i class="el-icon-chat-dot-round"></i>-->
-                <!--  评论数：-->
-                <!--  <span>{{blog.comment_cnt}}</span>-->
-                <!--</span>-->
               </div>
-              <!--<p class="abstract">{{blog.blog_summary}}</p>-->
             </div>
             <div
               id="artcle-content"
               class="typo js-toc-content m-padded-tb-small line-numbers match-braces rainbow-braces"
               v-html="blog.blog_content"
             ></div>
-
-            <!--<div id="articlebtn">-->
-            <!--  <el-row>-->
-            <!--    <el-tooltip class="love" content="点赞" placement="top">-->
-            <!--      <img @click="LikeBlog" class="icon" src="../assets/dianzan.png" alt />-->
-            <!--    </el-tooltip>-->
-            <!--    <el-popover placement="top" width="200" trigger="click">-->
-            <!--      <el-avatar-->
-            <!--        shape="square"-->
-            <!--        :size="200"-->
-            <!--        fit="fill"-->
-            <!--        :src="$store.state.siteInfo.reward"-->
-            <!--      ></el-avatar>-->
-            <!--      <svg-->
-            <!--        slot="reference"-->
-            <!--        style="width: 2.25em!important;height: 2.25em!important;"-->
-            <!--        t="1614349031867"-->
-            <!--        class="icon"-->
-            <!--        viewBox="0 0 1024 1024"-->
-            <!--        version="1.1"-->
-            <!--        xmlns="http://www.w3.org/2000/svg"-->
-            <!--        p-id="6413"-->
-            <!--        width="200"-->
-            <!--        height="200"-->
-            <!--      >-->
-            <!--        <path d="M427.2 444h169.6V480H427.2z" fill="#FF5500" p-id="6414" />-->
-            <!--        <path-->
-            <!--          d="M512 0C229.6 0 0 229.6 0 512s229.6 512 512 512 512-229.6 512-512S794.4 0 512 0zM319.2 359.2h86.4c-7.2-14.4-16-27.2-25.6-40l31.2-11.2c11.2 14.4 20.8 31.2 28.8 51.2h54.4V304h35.2v55.2H584c10.4-16.8 20-34.4 28-52l32 11.2c-6.4 13.6-14.4 27.2-24 40.8h84.8v92h-33.6v-63.2H352v64.8h-32.8V359.2z m82.4 202.4v99.2h-32.8V532H656v123.2h-32.8V561.6H401.6z m-6.4-57.6V420h234.4V504H395.2z m95.2 183.2c-24 22.4-78.4 36.8-161.6 42.4l-13.6-30.4c74.4-3.2 123.2-14.4 146.4-32 20.8-17.6 33.6-47.2 36.8-88l33.6 2.4c-6.4 52.8-20 87.2-41.6 105.6z m196.8 45.6c-53.6-24-108-42.4-164.8-56l16.8-24.8C600 665.6 656 683.2 706.4 704l-19.2 28.8z"-->
-            <!--          fill="#FF5500"-->
-            <!--          p-id="6415"-->
-            <!--        />-->
-            <!--      </svg>-->
-            <!--    </el-popover>-->
-            <!--  </el-row>-->
-            <!--</div>-->
-            <!--<div id="statement">-->
-            <!--  <p>-->
-            <!--    <span style="color:#3399ea;">-->
-            <!--      <em>{{$store.state.siteInfo.headInfo}}</em>-->
-            <!--    </span>-->
-            <!--  </p>-->
-            <!--  <div class="item">原文作者：{{$store.state.siteInfo.blogName}}</div>-->
-            <!--  <div class="item">-->
-            <!--    文章链接：-->
-            <!--    <a href>{{url}}</a>-->
-            <!--  </div>-->
-            <!--  <div class="item">版权声明：本博客所有文章除特别声明外,转载请注明出处!</div>-->
-            <!--</div>-->
-            <!--<commentList :objectData="{...propsData}" />-->
           </el-card>
         </el-row>
       </el-col>
