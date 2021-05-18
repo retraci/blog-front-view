@@ -6,14 +6,21 @@
           <el-card>
             <div id="artcle-info">
               <h1 class="text-center">
-                <strong style=" color: #222;">{{blog.blog_title}}</strong>
+                <strong style="font-size: 40px; color: #222;">{{blog.blog_title}}</strong>
               </h1>
               <!-- 描述：文章信息 -->
               <div class="text-center timeAndView">
-                <span class="article-time" style=" color: #888;">
-                  <i class="el-icon-time"></i>
-                  发表于：
+                <span class="article-author article-property">
+                  <i class="el-icon-user article-property-icon"></i>
+                  <span>root</span>
+                </span>
+                <span class="article-time article-property">
+                  <i class="el-icon-time article-property-icon"></i>
                   <span>{{blog.create_time}}</span>
+                </span>
+                <span class="article-tag article-property">
+                  <i class="el-icon-price-tag article-property-icon"></i>
+                  <span>JavaScript</span>
                 </span>
               </div>
             </div>
@@ -197,6 +204,18 @@ export default {
 </script>
 
 <style>
+
+.article-property {
+  margin-right: 1rem;
+  color: #888;
+}
+
+.article-property-icon {
+  margin-right: 5px;
+}
+
+/*--------------*/
+
 .is-position-fixed {
     position: -webkit-sticky!important;
     position: sticky!important;
@@ -225,7 +244,6 @@ a {
 }
 
 #artcle-info .timeAndView {
-  padding: 20px;
   line-height: 30px;
   font-size: 16px;
   color: #ffffff;

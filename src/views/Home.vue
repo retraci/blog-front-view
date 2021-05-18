@@ -9,11 +9,11 @@
           v-bind:key="index"
         >
           <div class="recent-post-item">
-            <div class='post_cover right_radius'>
-              <keep-alive>
-                <router-link :to="{name: 'article', params: {blogId: blog.blog_id}}" tag="span"></router-link>
-              </keep-alive>
-            </div>
+            <!--<div class='post_cover right_radius'>-->
+            <!--  <keep-alive>-->
+            <!--    <router-link :to="{name: 'article', params: {blogId: blog.blog_id}}" tag="span"></router-link>-->
+            <!--  </keep-alive>-->
+            <!--</div>-->
             <div class="recent-post-info">
               <div class="article-title">
                 <keep-alive>
@@ -60,20 +60,6 @@
             background
             hide-on-single-page
           ></el-pagination>
-        </div>
-      </el-col>
-      <el-col :span="6" class="hidden-sm-and-down" id="side">
-        <div class="item">
-          <Introduction />
-        </div>
-        <div class="item">
-          <categorys />
-        </div>
-        <div class="item">
-          <tags />
-        </div>
-        <div class="item">
-          <FriendSider />
         </div>
       </el-col>
     </el-row>
@@ -323,6 +309,8 @@ h5 {
   -o-transition: all 0.3s;
   -ms-transition: all 0.3s;
   transition: all 0.3s;
+
+  margin-bottom: 15px;
 }
 @media screen and (max-width: 768px) {
   #recent-posts > .recent-post-item {
@@ -383,7 +371,7 @@ h5 {
   display: inline-block;
   overflow: hidden;
   padding: 0 40px;
-  width: 55%;
+  width: 100% !important;
 }
 #recent-posts > .recent-post-item > .recent-post-info.no-cover {
   width: 100%;
