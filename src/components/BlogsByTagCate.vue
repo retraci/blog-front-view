@@ -187,7 +187,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 :root {
   --global-font-size: 14px;
   --global-bg: #fff;
@@ -356,7 +356,6 @@ h5 {
   -ms-flex-align: center;
   -webkit-align-items: center;
   align-items: center;
-  height: 20em;
   border-radius: 12px 8px 8px 12px;
   background: var(--card-bg);
   -webkit-box-shadow: var(--card-box-shadow);

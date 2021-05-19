@@ -6,16 +6,34 @@ import Element from 'element-ui'
 import "element-ui/lib/theme-chalk/index.css"
 import 'element-ui/lib/theme-chalk/display.css'
 import './assets/style.css'
-import "./assets/typo.css";
+import "./assets/typo.css"
+import SmoothScroll from 'smoothscroll-for-websites'
 import Head from './components/Head'
 import store from './store'
-Vue.use(Element)
 import axios from '@/plugins/axios'
-Vue.prototype.$axios = axios //
- // 全局注册
- // import with ES6
+
+Vue.use(Element)
+Vue.prototype.$axios = axios
 Vue.component("Head",Head)
 Vue.use(VueRouter)
+
+// SmoothScroll 的参数
+const options = {
+	frameRate: 150,
+	animationTime: 400,
+	stepSize: 100,
+	pulseAlgorithm: !0,
+	pulseScale: 4,
+	pulseNormalize: 1,
+	accelerationDelta: 50,
+	accelerationMax: 3,
+	keyboardSupport: !0,
+	arrowScroll: 50,
+	fixedBackground: !0,
+	excluded: ""
+}
+SmoothScroll(options)
+
 const cubic = value => Math.pow(value, 3);
 const easeInOutCubic = value => value < 0.5 ? cubic(value * 2) / 2 : 1 - cubic((1 - value) * 2) / 2;
 Vue.prototype.scrollToTop = function () {

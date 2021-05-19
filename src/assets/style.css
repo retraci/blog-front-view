@@ -1,6 +1,8 @@
-html,body{
-    margin: 0;
-    padding: 0;
+html, body{
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  min-width: 1366px;
 }
 a{
   text-decoration: none;
@@ -33,12 +35,12 @@ a{
     width: 8px;
     height: 8px;
   }
-  
+
   ::-webkit-scrollbar-track {
     background-color: rgba(73, 177, 245, 0.2);
     border-radius: 2em;
   }
-  
+
   ::-webkit-scrollbar-thumb {
     background-color: #49b1f5;
     background-image: -webkit-linear-gradient(
@@ -53,11 +55,11 @@ a{
     );
     border-radius: 2em;
   }
-  
+
   ::-webkit-scrollbar-corner {
     background-color: transparent;
   }
-  
+
   ::-moz-selection {
     color: #fff;
     background-color: #49b1f5;
@@ -239,7 +241,7 @@ a{
   .ui.table:not(.unstackable) td:first-child {
     font-weight: bold;
   }
-  
+
 /* Definition Table */
   .ui.definition.table:not(.unstackable) thead th:first-child {
     -webkit-box-shadow: none !important;
@@ -484,7 +486,7 @@ a{
     -webkit-box-shadow: none !important;
             box-shadow: none !important;
   }
-  
+
 /* Definition Table */
   .ui.definition[class*="tablet stackable"].table thead th:first-child {
     -webkit-box-shadow: none !important;
