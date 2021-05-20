@@ -3,20 +3,20 @@ import App from './App.vue'
 import router from './router'
 import VueRouter from 'vue-router'
 import Element from 'element-ui'
+import SmoothScroll from 'smoothscroll-for-websites'
+import Head from './components/Head'
+import store from './store'
+import axios from '@/plugins/axios'
 import "element-ui/lib/theme-chalk/index.css"
 import 'element-ui/lib/theme-chalk/display.css'
 import './assets/style.css'
 import "./assets/typo.css"
 import "./assets/global.less"
-import SmoothScroll from 'smoothscroll-for-websites'
-import Head from './components/Head'
-import store from './store'
-import axios from '@/plugins/axios'
 
+Vue.use(VueRouter)
 Vue.use(Element)
 Vue.prototype.$axios = axios
-Vue.component("Head",Head)
-Vue.use(VueRouter)
+Vue.component("Head", Head)
 
 // SmoothScroll 的参数
 const options = {

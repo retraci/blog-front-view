@@ -8,11 +8,9 @@
         </el-col>
       </el-row>
       <!--回到顶部-->
-		<el-backtop style="box-shadow: none;background: none;">
-			<img src="./assets/totop.png" style="width: 40px;height: 40px;">
-		</el-backtop>
-      <!--<meting-js server="netease" type="playlist" :id="musicId"  fixed="true" theme="#25CCF7"></meting-js>-->
-      <!--<Footer :siteInfo="siteInfo" :badges="badges" :newBlogs="newBlogs"/>-->
+      <el-backtop style="box-shadow: none;background: none;">
+        <img src="./assets/totop.png" style="width: 40px;height: 40px;">
+      </el-backtop>
     </div>
   </div>
 </template>
@@ -26,24 +24,24 @@ export default {
       navBarFixed: false,
       badges: [],
       siteInfo: {
-          blogName: '',
-          backgroundImage:'',
-          loginUrl:'',
-          headAvatar:'',
-          headInfo:''
-        },
-        musicId:60198,
-        newBlogs:[],
-        hitokoto:''
+        blogName: '',
+        backgroundImage: '',
+        loginUrl: '',
+        headAvatar: '',
+        headInfo: ''
+      },
+      musicId: 60198,
+      newBlogs: [],
+      hitokoto: ''
     };
   },
   components: {},
   methods: {
     watchScroll() {
       var scrollTop =
-        window.pageYOffset ||
-        document.documentElement.scrollTop ||
-        document.body.scrollTop;
+          window.pageYOffset ||
+          document.documentElement.scrollTop ||
+          document.body.scrollTop;
       //  当滚动超过 50 时，实现吸顶效果
       if (scrollTop > 50) {
         this.navBarFixed = true;
@@ -51,38 +49,38 @@ export default {
         this.navBarFixed = false;
       }
     },
-    getSiteSetting(){
+    getSiteSetting() {
       const _this = this;
       this.$axios
-        .get("/siteInfo")
-        .then(res => {
-         // console.log(res.data.data.siteInfo)
-          this.siteInfo = res.data.data.siteInfo
-          this.badges = res.data.data.badges
-          this.musicId=res.data.data.introduction.musicId
-          this.$store.dispatch('saveSiteInfo', this.siteInfo)
-					this.$store.dispatch('saveIntroduction', res.data.data.introduction)
-          document.title = this.$route.meta.title + this.siteInfo.webTitleSuffix
-          //document.title = this.siteInfo.webTitleSuffix
+          .get("/siteInfo")
+          .then(res => {
+            // console.log(res.data.data.siteInfo)
+            this.siteInfo = res.data.data.siteInfo
+            this.badges = res.data.data.badges
+            this.musicId = res.data.data.introduction.musicId
+            this.$store.dispatch('saveSiteInfo', this.siteInfo)
+            this.$store.dispatch('saveIntroduction', res.data.data.introduction)
+            document.title = this.$route.meta.title + this.siteInfo.webTitleSuffix
+            //document.title = this.siteInfo.webTitleSuffix
             // console.log(this.siteInfo)
             //console.log(this.musicId)
-        });
+          });
 
     },
-    getnewBlog(){
+    getnewBlog() {
       const _this = this;
       this.$axios
-        .get("/blogList", {
-          params: {
-            currentPage: 1
-          }
-        })
-        .then(res => {
-          _this.newBlogs = res.data.data;
-        });
+          .get("/blogList", {
+            params: {
+              currentPage: 1
+            }
+          })
+          .then(res => {
+            _this.newBlogs = res.data.data;
+          });
     }
   },
-  created(){
+  created() {
     this.getSiteSetting();
     this.getnewBlog();
   },
@@ -90,15 +88,15 @@ export default {
     let that = this;
     that.minHeight = document.documentElement.clientHeight;
     window.addEventListener("scroll", that.watchScroll);
-    window.onresize = function() {
+    window.onresize = function () {
       that.minHeight = document.documentElement.clientHeight;
     };
   },
-  watch:{
-      '$route':function(to,from){
-          document.body.scrollTop = 0;
-          document.documentElement.scrollTop = 0;
-      }
+  watch: {
+    '$route': function (to, from) {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+    }
   }
 };
 </script>
@@ -108,16 +106,18 @@ export default {
   font-family: "microsoft yahei";
   background-color: #f9f9f9;
 }
+
 #content {
   background-color: #f9f9f9;
   padding: 100px 0;
 
 }
+
 @media screen and (min-width: 320px) and (max-width: 750px) {
   #content {
-  background-color: #f9f9f9;
-  padding: 100px 0;
-}
+    background-color: #f9f9f9;
+    padding: 100px 0;
+  }
 }
 
 </style>

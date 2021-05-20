@@ -8,25 +8,19 @@ const routes = [
   {
     path: '/',
     component: () => import('@/views/Home'),
-    meta: {
-      title: '首页'
-    }
+    meta: { title: '首页' }
   },
   {
     path: '/Home',
     name: 'Home',
     component: () => import('@/views/Home'),
-    meta: {
-      title: '首页'
-    }
+    meta: { title: '首页' }
   },
   {
     path: '/archive',
     name: 'archive',
     component: () => import('@/views/Archive'),
-    meta: {
-      title: '归档'
-    }
+    meta: { title: '归档' }
   },
   {
     path: '/article/:blogId',
@@ -37,12 +31,16 @@ const routes = [
     }
   },
   {
-    path: '/list/:type/:id',
-    name: 'list',
-    component: () => import('@/components/BlogsByTagCate'),
-    meta: {
-      title: '文章'
-    }
+    path: '/search/:words',
+    name: 'search',
+    component: () => import('../views/Home'),
+    meta: { title: '搜索', params: 'words'}
+  },
+  {
+    path: '/category/:cateId',
+    name: 'category',
+    component: () => import('../views/Home'),
+    meta: { title: '分类', params: 'cateId'}
   },
 ]
 

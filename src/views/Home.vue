@@ -2,6 +2,12 @@
   <div id="home-page">
     <el-row type="flex" class="animate" justify="space-around">
       <el-col :span="screenWidth>750?16:24">
+        <!--通知栏-->
+        <el-card id="notify" v-if="showNotify">
+          <span v-if="searchWords">搜索结果: "{{ searchWords }}" 相关文章</span>
+          <span v-else-if="category">分类: "{{ category }}" 相关文章</span>
+        </el-card>
+
         <el-row
             class="recent-posts"
             id="recent-posts"
@@ -81,6 +87,20 @@ export default {
       screenWidth: document.body.clientWidth
     };
   },
+  computed: {
+    searchWords() {
+      return this.$route.params.words
+    },
+    category() {
+      return this.$route.params.cateId
+    },
+    showNotify() {
+      return this.category || this.searchWords
+    },
+    notice() {
+      return this.$store.getters.notice
+    }
+  },
   methods: {
     page(currentPage) {
       const _this = this;
@@ -96,7 +116,7 @@ export default {
             _this.currentPage = res.data.currentPage;
             _this.total = res.data.totalPage;
           });
-      this.scrollToTop()
+      // this.scrollToTop()
     }
   },
   mounted() {
@@ -130,12 +150,22 @@ export default {
 
 <style lang="less">
 #home-page {
+  /*=============通知=============*/
+
+  #notify {
+    margin-bottom: 50px;
+    text-align: center;
+  }
+
   /*=============多个卡片=============*/
+
   & #recent-posts {
     &:not(:first-child) {
       margin-top: 1.5rem;
     }
+
     /*=============卡片=============*/
+
     & > .recent-post-item {
       border-radius: 12px 8px 8px 12px;
       background: var(--card-bg);
@@ -153,6 +183,7 @@ export default {
       }
 
       /*=============卡片头=============*/
+
       & > .recent-post-header {
         border-left: 5px solid #4d4d4d;
         padding: 30px 0 15px 25px;
@@ -179,6 +210,7 @@ export default {
       }
 
       /*=============卡片中=============*/
+
       & > .recent-post-center {
         line-height: 1.8em;
         padding-right: 7.6923%;
@@ -192,6 +224,7 @@ export default {
       }
 
       /*=============卡片尾=============*/
+
       & > .recent-post-footer {
         padding-top: 15px;
         margin: 30px 7.6923% 0;
@@ -227,11 +260,13 @@ export default {
   }
 
   /*=============置顶=============*/
+
   & #top-context {
     color: rgb(var(--top-color));
   }
 
   /*=============分页=============*/
+
   & .pagination {
     margin-top: 30px;
     background-color: #f9f9f9;

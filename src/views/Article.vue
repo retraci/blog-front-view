@@ -276,10 +276,6 @@ export default {
 
   /*===========other===========*/
 
-  & a {
-    color: #3399ea;
-  }
-
   @media screen and (min-width: 320px) and (max-width: 750px) {
   }
 
