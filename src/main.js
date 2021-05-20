@@ -7,6 +7,7 @@ import "element-ui/lib/theme-chalk/index.css"
 import 'element-ui/lib/theme-chalk/display.css'
 import './assets/style.css'
 import "./assets/typo.css"
+import "./assets/global.less"
 import SmoothScroll from 'smoothscroll-for-websites'
 import Head from './components/Head'
 import store from './store'

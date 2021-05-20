@@ -1,17 +1,13 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import store from '../store'
-import Home from '../views/Home.vue'
-import Archive from '../views/Archive.vue'
-import Article from '../views/Article.vue'
-import BlogsByParams from '../components/BlogsByTagCate.vue'
+import store from '@/store'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    component: Home,
+    component: () => import('@/views/Home'),
     meta: {
       title: '首页'
     }
@@ -19,7 +15,7 @@ const routes = [
   {
     path: '/Home',
     name: 'Home',
-    component: Home,
+    component: () => import('@/views/Home'),
     meta: {
       title: '首页'
     }
@@ -27,7 +23,7 @@ const routes = [
   {
     path: '/archive',
     name: 'archive',
-    component: Archive,
+    component: () => import('@/views/Archive'),
     meta: {
       title: '归档'
     }
@@ -35,7 +31,7 @@ const routes = [
   {
     path: '/article/:blogId',
     name: 'article',
-    component: Article,
+    component: () => import('@/views/Article'),
     meta: {
       title: '文章'
     }
@@ -43,7 +39,7 @@ const routes = [
   {
     path: '/list/:type/:id',
     name: 'list',
-    component: BlogsByParams,
+    component: () => import('@/components/BlogsByTagCate'),
     meta: {
       title: '文章'
     }

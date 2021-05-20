@@ -1,53 +1,43 @@
 <template>
   <div class="home">
-    <el-row id="artList" type="flex" justify="space-around">
+    <el-row id="artList" class="animate" type="flex" justify="space-around">
+      <!--文章-->
       <el-col :span="screenWidth>750?16:24">
         <el-row class="art-item">
           <el-card>
             <div id="artcle-info">
-              <h1 class="text-center">
-                <strong style="font-size: 40px; color: #222;">{{blog.blog_title}}</strong>
-              </h1>
+              <h1 class="title">{{blog.blog_title}}</h1>
+              <hr class="horizontal-rule" />
               <!-- 描述：文章信息 -->
-              <div class="text-center timeAndView">
-                <span class="article-author article-property">
-                  <i class="el-icon-user article-property-icon"></i>
+              <div class="article-meta-wrap">
+                <span class="article-author article-meta-wrap-item">
+                  <i class="el-icon-user article-meta-wrap-item-icon"></i>
                   <span>root</span>
                 </span>
-                <span class="article-time article-property">
-                  <i class="el-icon-time article-property-icon"></i>
-                  <span>{{blog.create_time}}</span>
+                <span class="article-time article-meta-wrap-item">
+                  <i class="el-icon-time article-meta-wrap-item-icon"></i>
+                  <span>{{ blog.create_time }}</span>
                 </span>
-                <span class="article-tag article-property">
-                  <i class="el-icon-price-tag article-property-icon"></i>
+                <span class="article-tag article-meta-wrap-item">
+                  <i class="el-icon-price-tag article-meta-wrap-item-icon"></i>
                   <span>JavaScript</span>
                 </span>
               </div>
             </div>
+            <!--内容-->
             <div
-              id="artcle-content"
-              class="typo js-toc-content m-padded-tb-small line-numbers match-braces rainbow-braces"
-              v-html="blog.blog_content"
+                id="artcle-content"
+                class="typo js-toc-content m-padded-tb-small line-numbers match-braces rainbow-braces"
+                v-html="blog.blog_content"
             ></div>
           </el-card>
         </el-row>
       </el-col>
+      <!--目录-->
       <el-col :span="6" class="hidden-sm-and-down" id="side">
-        <div class="item">
-          <Introduction />
-        </div>
-        <div class="item">
-          <categorys />
-        </div>
-        <div class="item">
-          <tags />
-        </div>
-        <div class="item">
-          <FriendSider />
-        </div>
         <div class="item is-position-fixed">
           <!--只在文章页面显示目录-->
-							<Tocbot />
+          <Tocbot/>
         </div>
       </el-col>
     </el-row>
@@ -57,6 +47,7 @@
 <script>
 import {mapState} from "vuex";
 import Tocbot from "@/components/Tocbot";
+
 export default {
   name: "articledetail",
   data() {
@@ -70,57 +61,57 @@ export default {
       url: window.location.href
     };
   },
-  components:{
+  components: {
     Tocbot
   },
   computed: {
-			blogId() {
-				return parseInt(this.$route.params.blogId)
-      },
-      ...mapState(['siteInfo'])
-		},
+    blogId() {
+      return parseInt(this.$route.params.blogId)
+    },
+    ...mapState(['siteInfo'])
+  },
   beforeRouteEnter(to, from, next) {
-			//路由到博客文章页面之前，应将文章的渲染完成状态置为 false
-			next(vm => {
-				// 当 beforeRouteEnter 钩子执行前，组件实例尚未创建
-				// vm 就是当前组件的实例，可以在 next 方法中把 vm 当做 this用
-				vm.$store.dispatch('setIsBlogRenderComplete', false)
-			})
-		},
-		beforeRouteLeave(to, from, next) {
-			// 从文章页面路由到其它页面时，销毁当前组件的同时，要销毁tocbot实例
-			// 否则tocbot一直在监听页面滚动事件，而文章页面的锚点已经不存在了，会报"Uncaught TypeError: Cannot read property 'className' of null"
-			tocbot.destroy()
-			next()
-		},
-		beforeRouteUpdate(to, from, next) {
-			// 一般有两种情况会触发这个钩子
-			// ①当前文章页面跳转到其它文章页面
-			// ②点击目录跳转锚点时，路由hash值会改变，导致当前页面会重新加载，这种情况是不希望出现的
-			// 在路由 beforeRouteUpdate 中判断路径是否改变
-			// 如果跳转到其它页面，to.path!==from.path 就放行 next()
-			// 如果是跳转锚点，path不会改变，hash会改变，to.path===from.path, to.hash!==from.path 不放行路由跳转，就能让锚点正常跳转
-			if (to.path !== from.path) {
-        this.getBlog(to.params.blogId)
-       // console.log(to.params.blogId)
-				//只要路由路径有改变，且停留在当前Blog组件内，就把文章的渲染完成状态置为 false
-				this.$store.dispatch('setIsBlogRenderComplete', false)
-				next()
-			}
-		},
+    //路由到博客文章页面之前，应将文章的渲染完成状态置为 false
+    next(vm => {
+      // 当 beforeRouteEnter 钩子执行前，组件实例尚未创建
+      // vm 就是当前组件的实例，可以在 next 方法中把 vm 当做 this用
+      vm.$store.dispatch('setIsBlogRenderComplete', false)
+    })
+  },
+  beforeRouteLeave(to, from, next) {
+    // 从文章页面路由到其它页面时，销毁当前组件的同时，要销毁tocbot实例
+    // 否则tocbot一直在监听页面滚动事件，而文章页面的锚点已经不存在了，会报"Uncaught TypeError: Cannot read property 'className' of null"
+    tocbot.destroy()
+    next()
+  },
+  beforeRouteUpdate(to, from, next) {
+    // 一般有两种情况会触发这个钩子
+    // ①当前文章页面跳转到其它文章页面
+    // ②点击目录跳转锚点时，路由hash值会改变，导致当前页面会重新加载，这种情况是不希望出现的
+    // 在路由 beforeRouteUpdate 中判断路径是否改变
+    // 如果跳转到其它页面，to.path!==from.path 就放行 next()
+    // 如果是跳转锚点，path不会改变，hash会改变，to.path===from.path, to.hash!==from.path 不放行路由跳转，就能让锚点正常跳转
+    if (to.path !== from.path) {
+      this.getBlog(to.params.blogId)
+      // console.log(to.params.blogId)
+      //只要路由路径有改变，且停留在当前Blog组件内，就把文章的渲染完成状态置为 false
+      this.$store.dispatch('setIsBlogRenderComplete', false)
+      next()
+    }
+  },
   methods: {
     getBlog(blogId = this.blogId) {
       const _this = this;
       this.$axios.get("/blog/" + blogId).then(res => {
         // console.log(res.data.data)
-        if(res.data.code===200){
-                  _this.blog = res.data.data;
-        _this.propsData.blog_id = res.data.data.blog_id;
-        _this.$nextTick(() => {
-          Prism.highlightAll();
-          this.$store.dispatch('setIsBlogRenderComplete', true)
-        });
-          document.title = this.blog.blog_title+this.siteInfo.webTitleSuffix
+        if (res.data.code === 200) {
+          _this.blog = res.data.data;
+          _this.propsData.blog_id = res.data.data.blog_id;
+          _this.$nextTick(() => {
+            Prism.highlightAll();
+            this.$store.dispatch('setIsBlogRenderComplete', true)
+          });
+          document.title = this.blog.blog_title + this.siteInfo.webTitleSuffix
         }
 
       });
@@ -131,10 +122,10 @@ export default {
       var exdate = new Date();
       exdate.setDate(exdate.getDate() + expiredays);
       document.cookie =
-        key +
-        "=" +
-        escape(value) +
-        (expiredays == null ? "" : ";expires=" + exdate.toGMTString());
+          key +
+          "=" +
+          escape(value) +
+          (expiredays == null ? "" : ";expires=" + exdate.toGMTString());
     },
     getCookie(key) {
       if (document.cookie.length) {
@@ -150,10 +141,10 @@ export default {
         end -= start;
         var cookie = cookies.substr(start, end);
         return unescape(
-          cookie.substr(
-            cookie.indexOf("=") + 1,
-            cookie.length - cookie.indexOf("=") + 1
-          )
+            cookie.substr(
+                cookie.indexOf("=") + 1,
+                cookie.length - cookie.indexOf("=") + 1
+            )
         );
       } else {
         return null;
@@ -172,7 +163,7 @@ export default {
       }
     }
   },
-  created(){
+  created() {
     this.getBlog();
   },
   mounted() {
@@ -192,7 +183,7 @@ export default {
         this.screenWidth = val;
         this.timer = true;
         let that = this;
-        setTimeout(function() {
+        setTimeout(function () {
           // 打印screenWidth变化的值
           // console.log(that.screenWidth)
           that.timer = false;
@@ -203,62 +194,164 @@ export default {
 };
 </script>
 
-<style>
+<style lang="less">
+//
+//#artcle-info {
+//  padding: 20px;
+//  background-size: cover;
+//  background-repeat: no-repeat;
+//}
+//
+//#artcle-info > .title {
+//  font-size: 23px;
+//  font-weight: 600;
+//  color: #737373;
+//  margin: 0.67em 0;
+//}
+//#artcle-info > .title:before {
+//  content: "#";
+//  margin-right: 6px;
+//  color: #d82e16;
+//  font-size: 20px;
+//  font-weight: 600;
+//}
+//
+//#artcle-info > .horizontal-rule {
+//  height: 1px;
+//  border: 0;
+//  background: #EFEFEF;
+//  margin: 15px 0;
+//}
+//
+//#artcle-info > .article-meta-wrap {
+//  font-size: 14px;
+//  color: #D2D2D2;
+//  text-decoration: none;
+//  margin-bottom: 30px;
+//
+//  /*================*/
+//
+//  //line-height: 30px;
+//  //font-weight: 600;
+//}
+//
+//#artcle-info > .article-meta-wrap > .article-meta-wrap-item {
+//  margin-right: 1rem;
+//  color: #888;
+//}
+//
+//#artcle-info > .article-meta-wrap > .article-meta-wrap-item > span {
+//  margin: 0;
+//  padding: 0;
+//  border: 0;
+//  font-size: 100%;
+//  font: inherit;
+//  vertical-align: baseline;
+//}
+//
+//#artcle-info > .article-meta-wrap > .article-meta-wrap-item .article-meta-wrap-item-icon {
+//  margin-right: 5px;
+//}
+/*===========artcle-info===========*/
 
-.article-property {
-  margin-right: 1rem;
-  color: #888;
+#artcle-info {
+  //padding: 20px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  & > .title {
+    font-size: 23px;
+    font-weight: 600;
+    color: var(--typo-title-color);
+    margin: 0.67em 0;
+    &:before {
+      content: "#";
+      margin-right: 6px;
+      color: #d82e16;
+      font-size: 20px;
+      font-weight: 600;
+    }
+  }
+  & > .horizontal-rule {
+    height: 1px;
+    border: 0;
+    background: var(--typo-hr-color);
+    margin: 15px 0;
+  }
+  & > .article-meta-wrap {
+    font-size: 14px;
+    text-decoration: none;
+    margin-bottom: 30px;
+    //line-height: 30px;
+    //font-weight: 600;
+    & > .article-meta-wrap-item {
+      margin-right: 1rem;
+      & > span {
+        color: var(--typo-meta-color);
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font-size: 100%;
+        font: inherit;
+        vertical-align: baseline;
+      }
+      .article-meta-wrap-item-icon {
+        margin-right: 5px;
+      }
+    }
+  }
 }
 
-.article-property-icon {
-  margin-right: 5px;
+/*===========content===========*/
+
+#artcle-content > :nth-child(1) {
+  display: none;
 }
 
-/*--------------*/
+#artcle-content > :nth-child(2) {
+  margin-top: 0;
+}
 
-.is-position-fixed {
-    position: -webkit-sticky!important;
-    position: sticky!important;
-    top: 60px;
-}
-a {
-  color: #3399ea;
-}
+/*===========side===========*/
+
 #side .item {
   margin-bottom: 30px;
 }
-#artcle-info {
-  padding: 20px;
-  background-size: cover;
-  background-repeat: no-repeat;
-  margin-bottom: 40px;
+
+.is-position-fixed {
+  position: -webkit-sticky !important;
+  position: sticky !important;
+  top: 60px;
 }
+
+/*===========other===========*/
+
+a {
+  color: #3399ea;
+}
+
+@media screen and (min-width: 320px) and (max-width: 750px) {
+}
+
+/*======================================*/
+
 .article-views {
   padding-right: 10px;
 }
-#artcle-info .abstract {
-  color: #ffffff;
-  border-left: 3px solid #f56c6c;
-  padding: 10px;
-  background-color: rgba(126, 129, 135, 0.3);
-}
 
-#artcle-info .timeAndView {
-  line-height: 30px;
-  font-size: 16px;
-  color: #ffffff;
-}
 #articlebtn {
   text-align: center;
   margin-bottom: 40px;
 }
+
 pre.has {
   color: #ffffff;
   background-color: rgba(0, 0, 0, 0.8);
 }
+
 img.has {
   width: 100%;
 }
+
 .icon {
   cursor: pointer;
   display: inline-block;
@@ -274,16 +367,11 @@ img.has {
   font-style: normal;
   margin: 0 3.2px;
 }
+
 #statement {
   border-left: 3px solid #f56c6c;
   padding: 20px;
   background-color: #ebeef5;
 }
-@media screen and (min-width: 320px) and (max-width: 750px) {
-  .art-item {
-    margin-top: 40px;
-    position: relative;
-    width: 312px;
-  }
-}
+
 </style>

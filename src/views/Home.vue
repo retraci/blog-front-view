@@ -1,12 +1,12 @@
 <template>
   <div class="home" id="homeArticle">
-    <el-row type="flex" justify="space-around">
+    <el-row type="flex" class="animate" justify="space-around">
       <el-col :span="screenWidth>750?16:24">
         <el-row
-          class="recent-posts"
-          id="recent-posts"
-          v-for="(blog, index) in blogs"
-          v-bind:key="index"
+            class="recent-posts"
+            id="recent-posts"
+            v-for="(blog, index) in blogs"
+            v-bind:key="index"
         >
           <div class="recent-post-item">
             <div class="recent-post-header">
@@ -17,13 +17,13 @@
                       tag="span"
                       class="article-title"
                   >
-                    <span style="cursor: pointer;">{{blog.blog_title}}</span>
+                    <span style="cursor: pointer;">{{ blog.blog_title }}</span>
                   </router-link>
                 </keep-alive>
               </div>
             </div>
             <div class="recent-post-center">
-              <div class="content">{{blog.blog_summary}}</div>
+              <div class="content">{{ blog.blog_summary }}</div>
             </div>
             <div class="recent-post-footer">
               <div class="article-meta-wrap">
@@ -36,18 +36,18 @@
                 <div class="article-meta-wrap-item">
                   <i class="el-icon-date"></i>
                   <span>发表于</span>
-                  <span>{{blog.create_time}}</span>
+                  <span>{{ blog.create_time }}</span>
                 </div>
 
                 <div class="article-meta-wrap-item">
                   <i class="el-icon-time"></i>
                   <span>更新于</span>
-                  <span>{{blog.update_time}}</span>
+                  <span>{{ blog.update_time }}</span>
                 </div>
 
                 <div class="article-meta-wrap-item">
                   <i class="el-icon-folder-opened"></i>
-                  <span href class="article-meta__categories">{{blog.cateGory.category_name}}</span>
+                  <span href class="article-meta__categories">{{ blog.cateGory.category_name }}</span>
                 </div>
               </div>
             </div>
@@ -55,12 +55,12 @@
         </el-row>
         <div class="pagination">
           <el-pagination
-            @current-change="page"
-            :current-page="currentPage"
-            :page-count="total"
-            layout="prev, pager, next"
-            background
-            hide-on-single-page
+              @current-change="page"
+              :current-page="currentPage"
+              :page-count="total"
+              layout="prev, pager, next"
+              background
+              hide-on-single-page
           ></el-pagination>
         </div>
       </el-col>
@@ -85,89 +85,50 @@ export default {
     page(currentPage) {
       const _this = this;
       this.$axios
-        .get("/blogList", {
-          params: {
-            currentPage: currentPage
-          }
-        })
-        .then(res => {
-          _this.blogs = res.data.data;
-          // console.log(res.data.data)
-          _this.currentPage = res.data.currentPage;
-          _this.total = res.data.totalPage;
-        });
-       this.scrollToTop()
+          .get("/blogList", {
+            params: {
+              currentPage: currentPage
+            }
+          })
+          .then(res => {
+            _this.blogs = res.data.data;
+            // console.log(res.data.data)
+            _this.currentPage = res.data.currentPage;
+            _this.total = res.data.totalPage;
+          });
+      this.scrollToTop()
     }
   },
   mounted() {
     const that = this
     that.page(1);
-     window.onresize = () => {
-        return (() => {
-            window.screenWidth = document.body.clientWidth
-            that.screenWidth = window.screenWidth
-        })()
+    window.onresize = () => {
+      return (() => {
+        window.screenWidth = document.body.clientWidth
+        that.screenWidth = window.screenWidth
+      })()
     }
   },
-  watch:{
+  watch: {
     screenWidth(val) {
-        // 为了避免频繁触发resize函数导致页面卡顿，使用定时器
-        if(!this.timer){
-            // 一旦监听到的screenWidth值改变，就将其重新赋给data里的screenWidth
-            this.screenWidth = val
-            this.timer = true
-            let that = this
-            setTimeout(function(){
-                // 打印screenWidth变化的值
-               // console.log(that.screenWidth)
-                that.timer = false
-            },400)
-        }
+      // 为了避免频繁触发resize函数导致页面卡顿，使用定时器
+      if (!this.timer) {
+        // 一旦监听到的screenWidth值改变，就将其重新赋给data里的screenWidth
+        this.screenWidth = val
+        this.timer = true
+        let that = this
+        setTimeout(function () {
+          // 打印screenWidth变化的值
+          // console.log(that.screenWidth)
+          that.timer = false
+        }, 400)
+      }
     }
-}
+  }
 };
 </script>
 
 <style lang="less">
-:root {
-  --top-color: 255, 109, 109;
-  --content-bg: #f6f6f6;
-  --title-font-color: #696969;
-  --text-bg-hover: #49b1f5;
-
-  --card-box-shadow: 0 3px 8px 6px rgba(7, 17, 27, 0.06);
-  --card-hover-box-shadow: 0 3px 8px 6px rgba(7, 17, 27, 0.15);
-
-  /*---------------------*/
-
-  --global-font-size: 14px;
-  --global-bg: #fff;
-  --font-color: #4c4948;
-  --hr-border: #a4d8fa;
-  --hr-before-color: #80c8f8;
-  --search-bg: #f6f8fa;
-  --search-input-color: #4c4948;
-  --search-result-title: #4c4948;
-  --preloader-bg: #37474f;
-  --preloader-color: #fff;
-  --tab-border-color: #f0f0f0;
-  --tab-botton-bg: #f0f0f0;
-  --tab-botton-color: #1f2d3d;
-  --tab-button-hover-bg: #dcdcdc;
-  --tab-button-active-bg: #fff;
-  --card-bg: #fff;
-  --sidebar-bg: #f6f8fa;
-  --btn-hover-color: #ff7242;
-  --btn-color: #fff;
-  --btn-bg: #49b1f5;
-  --light-grey: #eee;
-  --white: #fff;
-  --text-highlight-color: #1f2d3d;
-  --blockquote-color: #6a737d;
-  --blockquote-bg: rgba(73, 177, 245, 0.1);
-  --reward-pop: #f5f5f5;
-  --toc-link-color: #666261;
-}
 
 // 响应式布局
 //@media screen and (max-width: 768px) {

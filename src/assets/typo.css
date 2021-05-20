@@ -1,6 +1,10 @@
 @charset "utf-8";
 
 .typo {
+    color: var(--typo-context-color);
+
+    /*=========================*/
+
     width: 100%;
     text-align: justify;
     word-wrap: break-word;
@@ -53,7 +57,7 @@
 /* 块/段落引用 */
 .typo blockquote {
     position: relative;
-    border-left: 1px solid #1abc9c;
+    border-left: 4px solid var(--typo-blockquote-color);
     padding-left: 1em;
     margin: 0em 1em;
 }
@@ -120,7 +124,7 @@
 
 /* 让链接在 hover 状态下显示下划线 */
 .typo a {
-    color: #1abc9c;
+    color: var(--typo-a-color);
 }
 
 .typo a:hover {
@@ -128,7 +132,7 @@
 }
 
 .typo a {
-    border-bottom: 1px solid #1abc9c;
+    border-bottom: 1px solid var(--typo-a-color);
 }
 
 .typo a:hover {
@@ -165,16 +169,19 @@
     margin-left: 5px;
     margin-right: 5px;
     border: 1px solid #ddd;
-    color: #e4305e;
+    color: var(--typo-code-color);
     background: #fdf2f5;
     border-radius: 3px;
     font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+}
+div .code-toolbar > .toolbar {
+    color: var(--typo-prism-btn-color);
 }
 
 /* 一致化 horizontal rule */
 .typo hr {
     border: none;
-    border-bottom: 1px solid #cfcfcf;
+    border-bottom: 1px solid var(--typo-hr-color);
     margin-bottom: 0.8em;
     height: 10px;
 }
@@ -189,7 +196,6 @@
 
 .typo strong, .typo b {
     font-weight: bold;
-    color: #000;
 }
 
 /* 可拖动文件添加拖动手势 */
@@ -232,7 +238,7 @@
 
 /* 标题应该更贴紧内容，并与其他块区分，margin 值要相应做优化 */
 .typo h1, .typo h2, .typo h3, .typo h4, .typo h5, .typo h6 {
-    color: #000;
+    color: var(--typo-h-color);
     margin-top: 1.2em;
     margin-bottom: 0.6em;
     font-weight: 600;
@@ -241,7 +247,7 @@
 
 .typo h1, .typo h2, .typo h3 {
     padding-bottom: .3em;
-    border-bottom: 1px solid #eaecef;
+    border-bottom: 1px solid var(--typo-h-bottom-border-color);
 }
 
 .typo h1 {
