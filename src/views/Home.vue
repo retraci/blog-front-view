@@ -1,5 +1,5 @@
 <template>
-  <div class="home" id="homeArticle">
+  <div id="home-page">
     <el-row type="flex" class="animate" justify="space-around">
       <el-col :span="screenWidth>750?16:24">
         <el-row
@@ -129,133 +129,140 @@ export default {
 </script>
 
 <style lang="less">
-
-// 响应式布局
-//@media screen and (max-width: 768px) {
-//  #recent-posts > .recent-post-item {
-//    border-radius: 12px 12px 8px 8px;
-//  }
-//  #recent-posts .recent-post-item {
-//    height: auto !important;
-//  }
-//  #recent-posts .recent-post-item {
-//    -webkit-box-ordinal-group: 2 !important;
-//    -moz-box-ordinal-group: 2 !important;
-//    -o-box-ordinal-group: 2 !important;
-//
-//    -ms-flex-order: 2 !important;
-//    -webkit-order: 2 !important;
-//    order: 2 !important;
-//    padding: 1rem 1rem 1.5rem;
-//    width: 100%;
-//  }
-//  #recent-posts .recent-post-item .recent-post-header .article-title {
-//    font-size: 1.43em;
-//  }
-//  #recent-posts .recent-post-item .recent-post-center .content {
-//    height: auto;
-//  }
-//}
-
-#recent-posts {
-  &:not(:first-child) {
-    margin-top: 1.5rem;
-  }
-
-  & > .recent-post-item {
-    border-radius: 12px 8px 8px 12px;
-    background: var(--card-bg);
-    -webkit-box-shadow: var(--card-box-shadow);
-    box-shadow: var(--card-box-shadow);
-    -webkit-transition: all 0.3s;
-    -moz-transition: all 0.3s;
-    -o-transition: all 0.3s;
-    -ms-transition: all 0.3s;
-    transition: all 0.3s;
-
-    &:hover {
-      -webkit-box-shadow: var(--card-hover-box-shadow);
-      box-shadow: var(--card-hover-box-shadow);
+#home-page {
+  /*=============多个卡片=============*/
+  & #recent-posts {
+    &:not(:first-child) {
+      margin-top: 1.5rem;
     }
+    /*=============卡片=============*/
+    & > .recent-post-item {
+      border-radius: 12px 8px 8px 12px;
+      background: var(--card-bg);
+      -webkit-box-shadow: var(--card-box-shadow);
+      box-shadow: var(--card-box-shadow);
+      -webkit-transition: all 0.3s;
+      -moz-transition: all 0.3s;
+      -o-transition: all 0.3s;
+      -ms-transition: all 0.3s;
+      transition: all 0.3s;
 
-    & > .recent-post-header {
-      border-left: 5px solid #4d4d4d;
-      padding: 30px 0 15px 25px;
-      padding-left: 7.6923%;
+      &:hover {
+        -webkit-box-shadow: var(--card-hover-box-shadow);
+        box-shadow: var(--card-hover-box-shadow);
+      }
 
-      & > .article-title {
-        color: var(--title-font-color);
-        margin-left: 0;
-        font-weight: 300;
-        line-height: 35px;
-        margin-bottom: 20px;
-        font-size: 26px;
-        -webkit-transition: all 0.2s ease-in-out;
-        -moz-transition: all 0.2s ease-in-out;
-        -o-transition: all 0.2s ease-in-out;
-        -ms-transition: all 0.2s ease-in-out;
-        transition: all 0.2s ease-in-out;
-        -webkit-line-clamp: 2;
+      /*=============卡片头=============*/
+      & > .recent-post-header {
+        border-left: 5px solid #4d4d4d;
+        padding: 30px 0 15px 25px;
+        padding-left: 7.6923%;
 
-        &:hover {
-          color: var(--text-bg-hover);
+        & > .article-title {
+          color: var(--title-font-color);
+          margin-left: 0;
+          font-weight: 300;
+          line-height: 35px;
+          margin-bottom: 20px;
+          font-size: 26px;
+          -webkit-transition: all 0.2s ease-in-out;
+          -moz-transition: all 0.2s ease-in-out;
+          -o-transition: all 0.2s ease-in-out;
+          -ms-transition: all 0.2s ease-in-out;
+          transition: all 0.2s ease-in-out;
+          -webkit-line-clamp: 2;
+
+          &:hover {
+            color: var(--text-bg-hover);
+          }
         }
       }
-    }
 
-    & > .recent-post-center {
-      line-height: 1.8em;
-      padding-right: 7.6923%;
-      padding-left: 7.6923%;
+      /*=============卡片中=============*/
+      & > .recent-post-center {
+        line-height: 1.8em;
+        padding-right: 7.6923%;
+        padding-left: 7.6923%;
 
-      & > .content {
-        border-left: 3.5px solid #ccc;
-        padding: 15px 20px;
-        background: var(--content-bg);
+        & > .content {
+          border-left: 3.5px solid #ccc;
+          padding: 15px 20px;
+          background: var(--content-bg);
+        }
       }
-    }
 
-    & > .recent-post-footer {
-      padding-top: 15px;
-      margin: 30px 7.6923% 0;
-      min-height: 72px;
-      border-top: 1px solid #ddd;
+      /*=============卡片尾=============*/
+      & > .recent-post-footer {
+        padding-top: 15px;
+        margin: 30px 7.6923% 0;
+        min-height: 72px;
+        border-top: 1px solid #ddd;
 
-      & > .article-meta-wrap {
-        margin-top: 10px;
-        padding-bottom: 20px;
+        & > .article-meta-wrap {
+          margin-top: 10px;
+          padding-bottom: 20px;
 
-        & > .article-meta-wrap-item {
-          font-size: 13px;
-          display: inline-block;
-          padding-right: 15px;
-          padding-left: 5px;
+          & > .article-meta-wrap-item {
+            font-size: 13px;
+            display: inline-block;
+            padding-right: 15px;
+            padding-left: 5px;
 
-          i {
-            margin: 0;
-            padding: 0;
-            border: 0;
-            font-size: 100%;
-            font: inherit;
-            vertical-align: baseline;
-          }
+            i {
+              margin: 0;
+              padding: 0;
+              border: 0;
+              font-size: 100%;
+              font: inherit;
+              vertical-align: baseline;
+            }
 
-          span {
-            margin-left: 5px;
+            span {
+              margin-left: 5px;
+            }
           }
         }
       }
     }
   }
-}
 
-#top-context {
-  color: rgb(var(--top-color));
-}
+  /*=============置顶=============*/
+  & #top-context {
+    color: rgb(var(--top-color));
+  }
 
-.pagination {
-  margin-top: 30px;
-  background-color: #f9f9f9;
+  /*=============分页=============*/
+  & .pagination {
+    margin-top: 30px;
+    background-color: #f9f9f9;
+  }
+
+  // 响应式布局
+  //@media screen and (max-width: 768px) {
+  //  #recent-posts > .recent-post-item {
+  //    border-radius: 12px 12px 8px 8px;
+  //  }
+  //  #recent-posts .recent-post-item {
+  //    height: auto !important;
+  //  }
+  //  #recent-posts .recent-post-item {
+  //    -webkit-box-ordinal-group: 2 !important;
+  //    -moz-box-ordinal-group: 2 !important;
+  //    -o-box-ordinal-group: 2 !important;
+  //
+  //    -ms-flex-order: 2 !important;
+  //    -webkit-order: 2 !important;
+  //    order: 2 !important;
+  //    padding: 1rem 1rem 1.5rem;
+  //    width: 100%;
+  //  }
+  //  #recent-posts .recent-post-item .recent-post-header .article-title {
+  //    font-size: 1.43em;
+  //  }
+  //  #recent-posts .recent-post-item .recent-post-center .content {
+  //    height: auto;
+  //  }
+  //}
 }
 
 </style>

@@ -1,13 +1,13 @@
 <template>
-  <div class="home">
+  <div id="article-page">
     <el-row id="artList" class="animate" type="flex" justify="space-around">
       <!--文章-->
       <el-col :span="screenWidth>750?16:24">
         <el-row class="art-item">
           <el-card>
             <div id="artcle-info">
-              <h1 class="title">{{blog.blog_title}}</h1>
-              <hr class="horizontal-rule" />
+              <h1 class="title">{{ blog.blog_title }}</h1>
+              <hr class="horizontal-rule"/>
               <!-- 描述：文章信息 -->
               <div class="article-meta-wrap">
                 <span class="article-author article-meta-wrap-item">
@@ -195,183 +195,135 @@ export default {
 </script>
 
 <style lang="less">
-//
-//#artcle-info {
-//  padding: 20px;
-//  background-size: cover;
-//  background-repeat: no-repeat;
-//}
-//
-//#artcle-info > .title {
-//  font-size: 23px;
-//  font-weight: 600;
-//  color: #737373;
-//  margin: 0.67em 0;
-//}
-//#artcle-info > .title:before {
-//  content: "#";
-//  margin-right: 6px;
-//  color: #d82e16;
-//  font-size: 20px;
-//  font-weight: 600;
-//}
-//
-//#artcle-info > .horizontal-rule {
-//  height: 1px;
-//  border: 0;
-//  background: #EFEFEF;
-//  margin: 15px 0;
-//}
-//
-//#artcle-info > .article-meta-wrap {
-//  font-size: 14px;
-//  color: #D2D2D2;
-//  text-decoration: none;
-//  margin-bottom: 30px;
-//
-//  /*================*/
-//
-//  //line-height: 30px;
-//  //font-weight: 600;
-//}
-//
-//#artcle-info > .article-meta-wrap > .article-meta-wrap-item {
-//  margin-right: 1rem;
-//  color: #888;
-//}
-//
-//#artcle-info > .article-meta-wrap > .article-meta-wrap-item > span {
-//  margin: 0;
-//  padding: 0;
-//  border: 0;
-//  font-size: 100%;
-//  font: inherit;
-//  vertical-align: baseline;
-//}
-//
-//#artcle-info > .article-meta-wrap > .article-meta-wrap-item .article-meta-wrap-item-icon {
-//  margin-right: 5px;
-//}
-/*===========artcle-info===========*/
+#article-page {
+  /*===========文章信息===========*/
+  & #artcle-info {
+    //padding: 20px;
+    background-size: cover;
+    background-repeat: no-repeat;
 
-#artcle-info {
-  //padding: 20px;
-  background-size: cover;
-  background-repeat: no-repeat;
-  & > .title {
-    font-size: 23px;
-    font-weight: 600;
-    color: var(--typo-title-color);
-    margin: 0.67em 0;
-    &:before {
-      content: "#";
-      margin-right: 6px;
-      color: #d82e16;
-      font-size: 20px;
+    & > .title {
+      font-size: 23px;
       font-weight: 600;
+      color: var(--typo-title-color);
+      margin: 0.67em 0;
+
+      &:before {
+        content: "#";
+        margin-right: 6px;
+        color: #d82e16;
+        font-size: 20px;
+        font-weight: 600;
+      }
+    }
+
+    & > .horizontal-rule {
+      height: 1px;
+      border: 0;
+      background: var(--typo-hr-color);
+      margin: 15px 0;
+    }
+
+    /*=============文章状态信息=============*/
+    & > .article-meta-wrap {
+      font-size: 14px;
+      text-decoration: none;
+      margin-bottom: 30px;
+      //line-height: 30px;
+      //font-weight: 600;
+
+      & > .article-meta-wrap-item {
+        margin-right: 1rem;
+
+        & > span {
+          color: var(--typo-meta-color);
+          margin: 0;
+          padding: 0;
+          border: 0;
+          font-size: 100%;
+          font: inherit;
+          vertical-align: baseline;
+        }
+
+        .article-meta-wrap-item-icon {
+          margin-right: 5px;
+        }
+      }
     }
   }
-  & > .horizontal-rule {
-    height: 1px;
-    border: 0;
-    background: var(--typo-hr-color);
-    margin: 15px 0;
+
+  /*===========content===========*/
+
+  & #artcle-content > :nth-child(1) {
+    display: none;
   }
-  & > .article-meta-wrap {
-    font-size: 14px;
-    text-decoration: none;
+
+  & #artcle-content > :nth-child(2) {
+    margin-top: 0;
+  }
+
+  /*===========side===========*/
+
+  & #side .item {
     margin-bottom: 30px;
-    //line-height: 30px;
-    //font-weight: 600;
-    & > .article-meta-wrap-item {
-      margin-right: 1rem;
-      & > span {
-        color: var(--typo-meta-color);
-        margin: 0;
-        padding: 0;
-        border: 0;
-        font-size: 100%;
-        font: inherit;
-        vertical-align: baseline;
-      }
-      .article-meta-wrap-item-icon {
-        margin-right: 5px;
-      }
-    }
   }
-}
 
-/*===========content===========*/
+  & .is-position-fixed {
+    position: -webkit-sticky !important;
+    position: sticky !important;
+    top: 60px;
+  }
 
-#artcle-content > :nth-child(1) {
-  display: none;
-}
+  /*===========other===========*/
 
-#artcle-content > :nth-child(2) {
-  margin-top: 0;
-}
+  & a {
+    color: #3399ea;
+  }
 
-/*===========side===========*/
+  @media screen and (min-width: 320px) and (max-width: 750px) {
+  }
 
-#side .item {
-  margin-bottom: 30px;
-}
+  /*======================================*/
 
-.is-position-fixed {
-  position: -webkit-sticky !important;
-  position: sticky !important;
-  top: 60px;
-}
+  & .article-views {
+    padding-right: 10px;
+  }
 
-/*===========other===========*/
+  & #articlebtn {
+    text-align: center;
+    margin-bottom: 40px;
+  }
 
-a {
-  color: #3399ea;
-}
+  & pre.has {
+    color: #ffffff;
+    background-color: rgba(0, 0, 0, 0.8);
+  }
 
-@media screen and (min-width: 320px) and (max-width: 750px) {
-}
+  & img.has {
+    width: 100%;
+  }
 
-/*======================================*/
+  & .icon {
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: top;
+    font-size: 18px;
+    width: 40px;
+    height: 40.4px;
+    line-height: 42px;
+    border-radius: 42px;
+    color: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+    font-style: normal;
+    margin: 0 3.2px;
+  }
 
-.article-views {
-  padding-right: 10px;
-}
-
-#articlebtn {
-  text-align: center;
-  margin-bottom: 40px;
-}
-
-pre.has {
-  color: #ffffff;
-  background-color: rgba(0, 0, 0, 0.8);
-}
-
-img.has {
-  width: 100%;
-}
-
-.icon {
-  cursor: pointer;
-  display: inline-block;
-  vertical-align: top;
-  font-size: 18px;
-  width: 40px;
-  height: 40.4px;
-  line-height: 42px;
-  border-radius: 42px;
-  color: rgba(0, 0, 0, 0.5);
-  background: rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease-in-out;
-  font-style: normal;
-  margin: 0 3.2px;
-}
-
-#statement {
-  border-left: 3px solid #f56c6c;
-  padding: 20px;
-  background-color: #ebeef5;
+  & #statement {
+    border-left: 3px solid #f56c6c;
+    padding: 20px;
+    background-color: #ebeef5;
+  }
 }
 
 </style>
