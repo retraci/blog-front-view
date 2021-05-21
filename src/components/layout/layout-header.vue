@@ -38,6 +38,7 @@
 
 <script>
 import HeaderSearch from '@/components/header-search'
+import {fetchAllCategory} from "@/api";
 
 export default {
   name: "layout-header",
@@ -83,14 +84,11 @@ export default {
       }
     },
     getCategoryIdAndTitle() {
-      const _this = this;
-      this.$axios
-          .get("/getAllCategory")
-          .then(res => {
-            //  console.log(res.data.data);
-            _this.categorys = res.data.data;
-            console.log(res.data.data);
-          });
+      const that = this
+      fetchAllCategory().then(res => {
+        //  console.log(res.data.data)
+        that.categorys = res.data.data
+      })
     },
     watchScroll() {
       // 获取距离顶部的距离
@@ -108,7 +106,7 @@ export default {
       this.lastScrollTop = scrollTop
     },
   },
-};
+}
 </script>
 
 <style lang="less">

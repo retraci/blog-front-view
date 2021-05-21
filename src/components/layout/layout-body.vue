@@ -19,14 +19,22 @@ import Banner from "@/components/banner";
 
 export default {
   name: "layout-body",
-  components: {Banner},
+  components: {
+    Banner,
+  },
   props: {
     siteInfo: {
       type: Object
     },
     minHeight: Number
   },
+  data() {
+    return {
+    }
+  },
   mounted() {
+  },
+  created() {
   }
 }
 </script>

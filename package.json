@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
+    "canvas-nest.js": "^2.0.3",
     "core-js": "^3.6.5",
     "element-ui": "^2.15.0",
     "mavon-editor": "^2.9.1",
@@ -17,6 +18,7 @@
     "smoothscroll-for-websites": "^1.4.10",
     "tocbot": "^4.12.2",
     "vue": "^2.6.11",
+    "vue-canvas-nest": "^2.0.0",
     "vue-router": "^3.2.0",
     "vuex": "^3.6.0"
   },

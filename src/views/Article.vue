@@ -35,7 +35,7 @@
       </el-col>
       <!--目录-->
       <el-col :span="6" id="side">
-        <div class="item is-position-fixed">
+        <div class="side-item is-position-fixed">
           <!--只在文章页面显示目录-->
           <Tocbot/>
         </div>
@@ -47,6 +47,7 @@
 <script>
 import {mapState} from "vuex";
 import Tocbot from "@/components/Tocbot";
+import {fetchBlog} from "@/api";
 
 export default {
   name: "articledetail",
@@ -101,17 +102,20 @@ export default {
   },
   methods: {
     getBlog(blogId = this.blogId) {
-      const _this = this;
-      this.$axios.get("/blog/" + blogId).then(res => {
+      const that = this
+
+      fetchBlog(blogId).then(res => {
+        // console.log(JSON.stringify(res))
+
         // console.log(res.data.data)
         if (res.data.code === 200) {
-          _this.blog = res.data.data;
-          _this.propsData.blog_id = res.data.data.blog_id;
-          _this.$nextTick(() => {
-            Prism.highlightAll();
+          that.blog = res.data.data
+          that.propsData.blog_id = res.data.data.blog_id
+          that.$nextTick(() => {
+            Prism.highlightAll()
             this.$store.dispatch('setIsBlogRenderComplete', true)
           });
-          document.title = this.blog.blog_title + this.siteInfo.webTitleSuffix
+          document.title = that.blog.blog_title + that.siteInfo.webTitleSuffix
         }
 
       });
@@ -131,6 +135,9 @@ export default {
 <style lang="less">
 #article-page {
   /*===========文章信息===========*/
+  & .art-item {
+    z-index: 2;
+  }
 
   & #artcle-info {
     //padding: 20px;
@@ -200,8 +207,9 @@ export default {
 
   /*===========side===========*/
 
-  & #side .item {
+  & #side .side-item {
     margin-bottom: 30px;
+    z-index: 2;
   }
 
   & .is-position-fixed {

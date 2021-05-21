@@ -1,5 +1,6 @@
 <template>
   <div id="home-page" :class="animateShow ? 'animate' : ''">
+
     <el-row type="flex" justify="space-around">
       <el-col :span="16">
         <!--通知栏-->
@@ -75,11 +76,15 @@
 </template>
 
 <script>
-import Banner from "@/components/banner";
+import Banner from "@/components/banner"
+import {fetchBlogList, fetchBlogListByCategory, fetchBlogListByWords} from "@/api";
+import Element from "element-ui";
 
 export default {
   name: "Home",
-  components: {Banner},
+  components: {
+    Banner,
+  },
   props: {
     siteInfo: {
       type: Object
@@ -93,8 +98,8 @@ export default {
       pageSize: 5,
       // screenWidth: document.body.clientWidth,
 
-      animateShow: true
-    };
+      animateShow: true,
+    }
   },
   computed: {
     searchWords() {
@@ -111,43 +116,82 @@ export default {
     }
   },
   methods: {
-    page(currentPage) {
-      const _this = this;
-      this.$axios
-          .get("/blogList", {
-            params: {
-              currentPage: currentPage
-            }
+    showAnimation() {
+      this.animateShow = true
+    },
+    getBlogList(data) {
+      const that = this
+
+      console.log(data)
+
+      if (data.params.cateId) {
+        fetchBlogListByCategory(data).then(res => {
+          that.blogs = res.data.data
+          // console.log(res.data.data)
+          that.currentPage = res.data.currentPage
+          that.total = res.data.totalPage
+
+          this.showAnimation()
+        })
+      } else if (data.params.word) {
+        fetchBlogListByWords(data).then(res => {
+          console.log(res)
+          that.blogs = res.data.data
+          // console.log(res.data.data)
+          that.currentPage = res.data.currentPage
+          that.total = res.data.totalPage
+
+          this.showAnimation()
+        }).catch(err => {
+          Element.Message({
+            message: err,
+            type: 'error',
+            duration: 2 * 1000
           })
-          .then(res => {
-            _this.blogs = res.data.data;
-            // console.log(res.data.data)
-            _this.currentPage = res.data.currentPage;
-            _this.total = res.data.totalPage;
-          });
-      // this.scrollToTop()
+        })
+      } else {
+        fetchBlogList(data).then(res => {
+          that.blogs = res.data.data
+          // console.log(res.data.data)
+          that.currentPage = res.data.currentPage
+          that.total = res.data.totalPage
+
+          this.showAnimation()
+        })
+      }
+    },
+    page(currentPage) {
+      let data = {
+        params: {
+          currentPage: currentPage,
+          word: this.searchWords,
+          cateId: this.category
+        }
+      }
+      this.getBlogList(data)
+      this.scrollToTop()
     }
   },
   mounted() {
     const that = this
-    that.page(1);
+    that.page(1)
   },
   watch: {
     $route(e) {
       console.log(e)
-
       this.animateShow = false
-      this.$nextTick(() => {
-        setTimeout(() => {
-          console.log('animate: true')
-          console.log(this.animateShow)
-          this.animateShow = true
-        }, 0)
-      })
 
+      let data = {
+        params: {
+          currentPage: 1,
+          word: this.searchWords,
+          cateId: this.category
+        }
+      }
+      this.getBlogList(data)
     },
   }
-};
+}
 </script>
 
 <style lang="less">
@@ -165,6 +209,7 @@ export default {
     &:not(:first-child) {
       margin-top: 1.5rem;
     }
+    z-index: 2;
 
     /*=============卡片=============*/
 

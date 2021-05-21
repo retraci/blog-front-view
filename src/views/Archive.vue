@@ -30,6 +30,8 @@
 </template>
 
 <script>
+import {fetchBlogArchive, fetchBlogsCount} from "@/api";
+
 export default {
   name: "archive",
   components: {},
@@ -44,26 +46,26 @@ export default {
   },
   methods: {
     getArchive(currentPage) {
-      const _this = this;
-      this.$axios
-          .get("/blogArchive", {
-            params: {
-              currentPage: currentPage
-            }
-          })
-          .then(res => {
-            // console.log(res.data.data)
-            _this.archives = res.data.data;
-            _this.currentPage = res.data.currentPage;
-            _this.total = res.data.totalPage;
-          });
+      const that = this
+
+      currentPage = 1
+      let date = {
+        params: {
+          currentPage: currentPage
+        }
+      }
+      fetchBlogArchive(date).then(res => {
+        that.archives = res.data.data
+        that.currentPage = res.data.currentPage
+        that.total = res.data.totalPage
+      });
     },
     getBlogCnt() {
-      const _this = this;
-      this.$axios.get("/blogsCount").then(res => {
+      const that = this
+      fetchBlogsCount().then(res => {
         // console.log(res.data.data)
-        _this.blogcount = res.data.data;
-      });
+        that.blogcount = res.data.data
+      })
     }
   },
   mounted() {

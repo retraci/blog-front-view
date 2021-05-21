@@ -47,6 +47,7 @@ export default {
   position: relative;
   width: 100%;
   height: 500px;
+  z-index: 2;
 
   .banner-img {
     width: inherit;
