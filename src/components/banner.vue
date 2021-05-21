@@ -20,10 +20,25 @@ export default {
   props: {
     siteInfo: {
       type: Object
-    },
+    }
   },
   data() {
+    return {
+      activeIndex: "/home",
+      categorys: [],
+      restaurants: [],
+      state: "",
+      timeout: null,
+
+      fixed: false,
+      hidden: false,
+    };
   },
+  mounted() {
+  },
+  beforeDestroy() {
+  },
+  methods: {},
 };
 </script>
 

@@ -118,73 +118,20 @@ export default {
       this.scrollToTop();
       // console.log(blogId);
     },
-    // setCookie(key, value, expiredays) {
-    //   var exdate = new Date();
-    //   exdate.setDate(exdate.getDate() + expiredays);
-    //   document.cookie =
-    //       key +
-    //       "=" +
-    //       escape(value) +
-    //       (expiredays == null ? "" : ";expires=" + exdate.toGMTString());
-    // },
-    // getCookie(key) {
-    //   if (document.cookie.length) {
-    //     var cookies = " " + document.cookie;
-    //     var start = cookies.indexOf(" " + key + "=");
-    //     if (start == -1) {
-    //       return null;
-    //     }
-    //     var end = cookies.indexOf(";", start);
-    //     if (end == -1) {
-    //       end = cookies.length;
-    //     }
-    //     end -= start;
-    //     var cookie = cookies.substr(start, end);
-    //     return unescape(
-    //         cookie.substr(
-    //             cookie.indexOf("=") + 1,
-    //             cookie.length - cookie.indexOf("=") + 1
-    //         )
-    //     );
-    //   } else {
-    //     return null;
-    //   }
-    // },
   },
   created() {
     this.getBlog();
   },
   mounted() {
-    // const that = this;
-    // window.onresize = () => {
-    //   return (() => {
-    //     window.screenWidth = document.body.clientWidth;
-    //     that.screenWidth = window.screenWidth;
-    //   })();
-    // };
   },
-  watch: {
-    // screenWidth(val) {
-    //   // 为了避免频繁触发resize函数导致页面卡顿，使用定时器
-    //   if (!this.timer) {
-    //     // 一旦监听到的screenWidth值改变，就将其重新赋给data里的screenWidth
-    //     this.screenWidth = val;
-    //     this.timer = true;
-    //     let that = this;
-    //     setTimeout(function () {
-    //       // 打印screenWidth变化的值
-    //       console.log(that.screenWidth)
-    //       that.timer = false;
-    //     }, 400);
-    //   }
-    // }
-  }
+  watch: {}
 };
 </script>
 
 <style lang="less">
 #article-page {
   /*===========文章信息===========*/
+
   & #artcle-info {
     //padding: 20px;
     background-size: cover;
@@ -213,6 +160,7 @@ export default {
     }
 
     /*=============文章状态信息=============*/
+
     & > .article-meta-wrap {
       font-size: 14px;
       text-decoration: none;

@@ -2,7 +2,7 @@
   <div class="header-search">
     <i class="iconfont el-icon-search"></i>
     <input ref="searchInput" id="searchInput" :class="{'show':show}"
-           v-model="searchValue" type="text" @keyup.enter ="search"/>
+           v-model="searchValue" type="text" @keyup.enter="search"/>
   </div>
 </template>
 
@@ -57,17 +57,12 @@ export default {
     height: 30px;
     width: 0;
     transition: .2s all;
-
     border-bottom: 1px solid #8fd0cc;
 
     &.show {
       width: 200px;
       margin-left: 10px;
     }
-
-    //&:focus {
-    //  border-bottom: 1px solid #8fd0cc;
-    //}
   }
 }
 </style>

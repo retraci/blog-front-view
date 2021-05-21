@@ -1,6 +1,6 @@
 <template>
-  <div id="home-page">
-    <el-row type="flex" class="animate" justify="space-around">
+  <div id="home-page" :class="animateShow ? 'animate' : ''">
+    <el-row type="flex" justify="space-around">
       <el-col :span="16">
         <!--通知栏-->
         <el-card id="notify" v-if="showNotify">
@@ -75,9 +75,16 @@
 </template>
 
 <script>
+import Banner from "@/components/banner";
+
 export default {
   name: "Home",
-  components: {},
+  components: {Banner},
+  props: {
+    siteInfo: {
+      type: Object
+    }
+  },
   data() {
     return {
       blogs: {},
@@ -124,12 +131,6 @@ export default {
   mounted() {
     const that = this
     that.page(1);
-    // window.onresize = () => {
-    //   return (() => {
-    //     window.screenWidth = document.body.clientWidth
-    //     that.screenWidth = window.screenWidth
-    //   })()
-    // }
   },
   watch: {
     $route(e) {
@@ -138,25 +139,13 @@ export default {
       this.animateShow = false
       this.$nextTick(() => {
         setTimeout(() => {
+          console.log('animate: true')
+          console.log(this.animateShow)
           this.animateShow = true
-        }, 1)
+        }, 0)
       })
 
     },
-    // screenWidth(val) {
-    //   // 为了避免频繁触发resize函数导致页面卡顿，使用定时器
-    //   if (!this.timer) {
-    //     // 一旦监听到的screenWidth值改变，就将其重新赋给data里的screenWidth
-    //     this.screenWidth = val
-    //     this.timer = true
-    //     let that = this
-    //     setTimeout(function () {
-    //       // 打印screenWidth变化的值
-    //       // console.log(that.screenWidth)
-    //       that.timer = false
-    //     }, 400)
-    //   }
-    // }
   }
 };
 </script>
@@ -284,33 +273,6 @@ export default {
     margin-top: 30px;
     background-color: #f9f9f9;
   }
-
-  // 响应式布局
-  //@media screen and (max-width: 768px) {
-  //  #recent-posts > .recent-post-item {
-  //    border-radius: 12px 12px 8px 8px;
-  //  }
-  //  #recent-posts .recent-post-item {
-  //    height: auto !important;
-  //  }
-  //  #recent-posts .recent-post-item {
-  //    -webkit-box-ordinal-group: 2 !important;
-  //    -moz-box-ordinal-group: 2 !important;
-  //    -o-box-ordinal-group: 2 !important;
-  //
-  //    -ms-flex-order: 2 !important;
-  //    -webkit-order: 2 !important;
-  //    order: 2 !important;
-  //    padding: 1rem 1rem 1.5rem;
-  //    width: 100%;
-  //  }
-  //  #recent-posts .recent-post-item .recent-post-header .article-title {
-  //    font-size: 1.43em;
-  //  }
-  //  #recent-posts .recent-post-item .recent-post-center .content {
-  //    height: auto;
-  //  }
-  //}
 }
 
 </style>

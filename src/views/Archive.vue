@@ -2,7 +2,7 @@
   <div class="archive">
     <el-row id="artList" type="flex" justify="space-around">
       <el-col :span="16">
-        <el-row id="time-line-br"></el-row>
+        <el-row class="archive-title">文章归档</el-row>
         <el-row class="block animate">
           <div>
             <el-timeline>
@@ -85,7 +85,8 @@ export default {
 
 #time-line-br {
   width: 100%;
-  margin: 120px 0;
+  margin-top: 20px;
+  margin-bottom: 100px;
   border: 0;
   height: 1px;
   background-image: linear-gradient(90deg, transparent, rgba(255, 109, 109, .75), transparent);
@@ -100,8 +101,6 @@ export default {
   color: #000;
   font-size: 15px;
   font-weight: 400;
-  /*padding-bottom: 20px;*/
-  /*padding-top: 20px;*/
   text-decoration: none;
 }
 
@@ -119,10 +118,21 @@ export default {
   color: #e6a23c;
 }
 
-//@media screen and (min-width: 320px) and (max-width: 750px) {
-//  .atrtitle {
-//    margin-top: 50px;
-//  }
-//}
+#artList .archive-title {
+  font-size: 1.5em;
+  font-weight: 400;
+  color: #676767;
+  padding-bottom: 15px;
+  border-bottom: 1px dashed #F1F1F1;
+  text-align: center;
+
+  display: block;
+  margin-block-start: 0.83em;
+  margin-block-end: 0.83em;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+
+  margin-bottom: 50px;
+}
 
 </style>

@@ -1,21 +1,16 @@
 <template>
   <div id="app">
     <div class="rg-table-box">
-      <Head :class="{'navBarWrap':navBarFixed}" :siteInfo="siteInfo"></Head>
-      <el-row type="flex" justify="center" id="content">
-        <el-col :xs="20" :md="20" :style="{'minHeight':minHeight+'px'}">
-          <router-view></router-view>
-        </el-col>
-      </el-row>
-      <!--回到顶部-->
-      <el-backtop style="box-shadow: none;background: none;">
-        <img src="./assets/totop.png" style="width: 40px;height: 40px;">
-      </el-backtop>
+      <layout-header :site-info="siteInfo"></layout-header>
+      <layout-body :site-info="siteInfo" :minHeight="minHeight"></layout-body>
     </div>
   </div>
 </template>
 
 <script>
+import LayoutBody from "@/components/layout/layout-body";
+import LayoutHeader from "@/components/layout/layout-header";
+
 export default {
   name: "app",
   data() {
@@ -35,7 +30,7 @@ export default {
       hitokoto: ''
     };
   },
-  components: {},
+  components: {LayoutHeader, LayoutBody},
   methods: {
     watchScroll() {
       var scrollTop =
@@ -104,21 +99,8 @@ export default {
 <style scoped>
 #app {
   font-family: "microsoft yahei";
-  background-color: #f9f9f9;
+  background-color: var(--bg-color);
 }
-
-#content {
-  background-color: #f9f9f9;
-  padding: 100px 0;
-
-}
-
-/*@media screen and (min-width: 320px) and (max-width: 750px) {*/
-/*  #content {*/
-/*    background-color: #f9f9f9;*/
-/*    padding: 100px 0;*/
-/*  }*/
-/*}*/
 
 </style>
 
