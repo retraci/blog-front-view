@@ -1,7 +1,7 @@
 <template>
   <div id="home-page">
     <el-row type="flex" class="animate" justify="space-around">
-      <el-col :span="screenWidth>750?16:24">
+      <el-col :span="16">
         <!--通知栏-->
         <el-card id="notify" v-if="showNotify">
           <span v-if="searchWords">搜索结果: "{{ searchWords }}" 相关文章</span>
@@ -84,7 +84,9 @@ export default {
       currentPage: 1,
       total: 0,
       pageSize: 5,
-      screenWidth: document.body.clientWidth
+      // screenWidth: document.body.clientWidth,
+
+      animateShow: true
     };
   },
   computed: {
@@ -122,28 +124,39 @@ export default {
   mounted() {
     const that = this
     that.page(1);
-    window.onresize = () => {
-      return (() => {
-        window.screenWidth = document.body.clientWidth
-        that.screenWidth = window.screenWidth
-      })()
-    }
+    // window.onresize = () => {
+    //   return (() => {
+    //     window.screenWidth = document.body.clientWidth
+    //     that.screenWidth = window.screenWidth
+    //   })()
+    // }
   },
   watch: {
-    screenWidth(val) {
-      // 为了避免频繁触发resize函数导致页面卡顿，使用定时器
-      if (!this.timer) {
-        // 一旦监听到的screenWidth值改变，就将其重新赋给data里的screenWidth
-        this.screenWidth = val
-        this.timer = true
-        let that = this
-        setTimeout(function () {
-          // 打印screenWidth变化的值
-          // console.log(that.screenWidth)
-          that.timer = false
-        }, 400)
-      }
-    }
+    $route(e) {
+      console.log(e)
+
+      this.animateShow = false
+      this.$nextTick(() => {
+        setTimeout(() => {
+          this.animateShow = true
+        }, 1)
+      })
+
+    },
+    // screenWidth(val) {
+    //   // 为了避免频繁触发resize函数导致页面卡顿，使用定时器
+    //   if (!this.timer) {
+    //     // 一旦监听到的screenWidth值改变，就将其重新赋给data里的screenWidth
+    //     this.screenWidth = val
+    //     this.timer = true
+    //     let that = this
+    //     setTimeout(function () {
+    //       // 打印screenWidth变化的值
+    //       // console.log(that.screenWidth)
+    //       that.timer = false
+    //     }, 400)
+    //   }
+    // }
   }
 };
 </script>

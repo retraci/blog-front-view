@@ -2,7 +2,7 @@
   <div id="article-page">
     <el-row id="artList" class="animate" type="flex" justify="space-around">
       <!--文章-->
-      <el-col :span="screenWidth>750?16:24">
+      <el-col :span="16">
         <el-row class="art-item">
           <el-card>
             <div id="artcle-info">
@@ -34,7 +34,7 @@
         </el-row>
       </el-col>
       <!--目录-->
-      <el-col :span="6" class="hidden-sm-and-down" id="side">
+      <el-col :span="6" id="side">
         <div class="item is-position-fixed">
           <!--只在文章页面显示目录-->
           <Tocbot/>
@@ -57,7 +57,7 @@ export default {
         page: 0
       },
       blog: {},
-      screenWidth: document.body.clientWidth,
+      // screenWidth: document.body.clientWidth,
       url: window.location.href
     };
   },
@@ -118,78 +118,66 @@ export default {
       this.scrollToTop();
       // console.log(blogId);
     },
-    setCookie(key, value, expiredays) {
-      var exdate = new Date();
-      exdate.setDate(exdate.getDate() + expiredays);
-      document.cookie =
-          key +
-          "=" +
-          escape(value) +
-          (expiredays == null ? "" : ";expires=" + exdate.toGMTString());
-    },
-    getCookie(key) {
-      if (document.cookie.length) {
-        var cookies = " " + document.cookie;
-        var start = cookies.indexOf(" " + key + "=");
-        if (start == -1) {
-          return null;
-        }
-        var end = cookies.indexOf(";", start);
-        if (end == -1) {
-          end = cookies.length;
-        }
-        end -= start;
-        var cookie = cookies.substr(start, end);
-        return unescape(
-            cookie.substr(
-                cookie.indexOf("=") + 1,
-                cookie.length - cookie.indexOf("=") + 1
-            )
-        );
-      } else {
-        return null;
-      }
-    },
-    LikeBlog() {
-      const blogId = this.$route.params.blogId;
-      const _this = this;
-      if (_this.getCookie("likeblog" + blogId) == null) {
-        this.$axios.post("/likeBlog/" + blogId).then(res => {
-          _this.$message.success(res.data.msg);
-          _this.setCookie("likeblog" + blogId, blogId, 365);
-        });
-      } else {
-        _this.$message.warning("你已经点赞了");
-      }
-    }
+    // setCookie(key, value, expiredays) {
+    //   var exdate = new Date();
+    //   exdate.setDate(exdate.getDate() + expiredays);
+    //   document.cookie =
+    //       key +
+    //       "=" +
+    //       escape(value) +
+    //       (expiredays == null ? "" : ";expires=" + exdate.toGMTString());
+    // },
+    // getCookie(key) {
+    //   if (document.cookie.length) {
+    //     var cookies = " " + document.cookie;
+    //     var start = cookies.indexOf(" " + key + "=");
+    //     if (start == -1) {
+    //       return null;
+    //     }
+    //     var end = cookies.indexOf(";", start);
+    //     if (end == -1) {
+    //       end = cookies.length;
+    //     }
+    //     end -= start;
+    //     var cookie = cookies.substr(start, end);
+    //     return unescape(
+    //         cookie.substr(
+    //             cookie.indexOf("=") + 1,
+    //             cookie.length - cookie.indexOf("=") + 1
+    //         )
+    //     );
+    //   } else {
+    //     return null;
+    //   }
+    // },
   },
   created() {
     this.getBlog();
   },
   mounted() {
-    const that = this;
-    window.onresize = () => {
-      return (() => {
-        window.screenWidth = document.body.clientWidth;
-        that.screenWidth = window.screenWidth;
-      })();
-    };
+    // const that = this;
+    // window.onresize = () => {
+    //   return (() => {
+    //     window.screenWidth = document.body.clientWidth;
+    //     that.screenWidth = window.screenWidth;
+    //   })();
+    // };
   },
   watch: {
-    screenWidth(val) {
-      // 为了避免频繁触发resize函数导致页面卡顿，使用定时器
-      if (!this.timer) {
-        // 一旦监听到的screenWidth值改变，就将其重新赋给data里的screenWidth
-        this.screenWidth = val;
-        this.timer = true;
-        let that = this;
-        setTimeout(function () {
-          // 打印screenWidth变化的值
-          // console.log(that.screenWidth)
-          that.timer = false;
-        }, 400);
-      }
-    }
+    // screenWidth(val) {
+    //   // 为了避免频繁触发resize函数导致页面卡顿，使用定时器
+    //   if (!this.timer) {
+    //     // 一旦监听到的screenWidth值改变，就将其重新赋给data里的screenWidth
+    //     this.screenWidth = val;
+    //     this.timer = true;
+    //     let that = this;
+    //     setTimeout(function () {
+    //       // 打印screenWidth变化的值
+    //       console.log(that.screenWidth)
+    //       that.timer = false;
+    //     }, 400);
+    //   }
+    // }
   }
 };
 </script>
@@ -276,8 +264,8 @@ export default {
 
   /*===========other===========*/
 
-  @media screen and (min-width: 320px) and (max-width: 750px) {
-  }
+  //@media screen and (min-width: 320px) and (max-width: 750px) {
+  //}
 
   /*======================================*/
 

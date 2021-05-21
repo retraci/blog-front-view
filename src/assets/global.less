@@ -1,4 +1,5 @@
 :root {
+  --theme-color: #409EFF;
   --top-color: 255, 109, 109;
   --content-bg: #f6f6f6;
   --title-font-color: #696969;
@@ -17,6 +18,10 @@
   --typo-h-bottom-border-color: #eaecef;
   --typo-hr-color: #efefef;
   --typo-prism-btn-color: #fff;
+
+  --tag-success-text-color: #64c23a;
+  --tag-warning-text-color: #e6a23c;
+  --tag-danger-text-color: #f56c6c;
 
   /*====================================*/
 
@@ -47,4 +52,44 @@
   --blockquote-bg: rgba(73, 177, 245, 0.1);
   --reward-pop: #f5f5f5;
   --toc-link-color: #666261;
+}
+
+html, body, #app {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  min-width: 1366px;
+}
+
+.no-select {
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  user-select:none;
+}
+
+.menu-item:hover {
+  color: var(--theme-color) !important;
+}
+
+.menu-item {
+  font-weight: 500;
+  font-size: 15px;
+}
+
+@keyframes main {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate {
+  -webkit-animation: main 1.5s;
+  animation: main 1.5s;
 }

@@ -1,8 +1,7 @@
-html, body{
+html, body {
   margin: 0;
   padding: 0;
   height: 100%;
-  min-width: 1366px;
 }
 a{
   text-decoration: none;
@@ -203,51 +202,51 @@ a{
 }
 
 /* Responsive */
-@media only screen and (max-width: 767px) {
-  .ui.table:not(.unstackable) {
-    width: 100%;
-  }
-  .ui.table:not(.unstackable) tbody,
-  .ui.table:not(.unstackable) tr,
-  .ui.table:not(.unstackable) tr > th,
-  .ui.table:not(.unstackable) tr > td {
-    width: auto !important;
-    display: block !important;
-  }
-  .ui.table:not(.unstackable) {
-    padding: 0em;
-  }
-  .ui.table:not(.unstackable) thead {
-    display: block;
-  }
-  .ui.table:not(.unstackable) tfoot {
-    display: block;
-  }
-  .ui.table:not(.unstackable) tr {
-    padding-top: 1em;
-    padding-bottom: 1em;
-    -webkit-box-shadow: 0px -1px 0px 0px rgba(0, 0, 0, 0.1) inset !important;
-            box-shadow: 0px -1px 0px 0px rgba(0, 0, 0, 0.1) inset !important;
-  }
-  .ui.table:not(.unstackable) tr > th,
-  .ui.table:not(.unstackable) tr > td {
-    background: none;
-    border: none !important;
-    padding: 0.25em 0.75em !important;
-    -webkit-box-shadow: none !important;
-            box-shadow: none !important;
-  }
-  .ui.table:not(.unstackable) th:first-child,
-  .ui.table:not(.unstackable) td:first-child {
-    font-weight: bold;
-  }
+/*@media only screen and (max-width: 767px) {*/
+/*  .ui.table:not(.unstackable) {*/
+/*    width: 100%;*/
+/*  }*/
+/*  .ui.table:not(.unstackable) tbody,*/
+/*  .ui.table:not(.unstackable) tr,*/
+/*  .ui.table:not(.unstackable) tr > th,*/
+/*  .ui.table:not(.unstackable) tr > td {*/
+/*    width: auto !important;*/
+/*    display: block !important;*/
+/*  }*/
+/*  .ui.table:not(.unstackable) {*/
+/*    padding: 0em;*/
+/*  }*/
+/*  .ui.table:not(.unstackable) thead {*/
+/*    display: block;*/
+/*  }*/
+/*  .ui.table:not(.unstackable) tfoot {*/
+/*    display: block;*/
+/*  }*/
+/*  .ui.table:not(.unstackable) tr {*/
+/*    padding-top: 1em;*/
+/*    padding-bottom: 1em;*/
+/*    -webkit-box-shadow: 0px -1px 0px 0px rgba(0, 0, 0, 0.1) inset !important;*/
+/*            box-shadow: 0px -1px 0px 0px rgba(0, 0, 0, 0.1) inset !important;*/
+/*  }*/
+/*  .ui.table:not(.unstackable) tr > th,*/
+/*  .ui.table:not(.unstackable) tr > td {*/
+/*    background: none;*/
+/*    border: none !important;*/
+/*    padding: 0.25em 0.75em !important;*/
+/*    -webkit-box-shadow: none !important;*/
+/*            box-shadow: none !important;*/
+/*  }*/
+/*  .ui.table:not(.unstackable) th:first-child,*/
+/*  .ui.table:not(.unstackable) td:first-child {*/
+/*    font-weight: bold;*/
+/*  }*/
 
-/* Definition Table */
-  .ui.definition.table:not(.unstackable) thead th:first-child {
-    -webkit-box-shadow: none !important;
-            box-shadow: none !important;
-  }
-}
+/*!* Definition Table *!*/
+/*  .ui.definition.table:not(.unstackable) thead th:first-child {*/
+/*    -webkit-box-shadow: none !important;*/
+/*            box-shadow: none !important;*/
+/*  }*/
+/*}*/
 
 
 /*******************************
@@ -454,45 +453,45 @@ a{
     Stackable
 ---------------*/
 
-@media only screen and (max-width: 991px) {
-  .ui[class*="tablet stackable"].table,
-  .ui[class*="tablet stackable"].table tbody,
-  .ui[class*="tablet stackable"].table tr,
-  .ui[class*="tablet stackable"].table tr > th,
-  .ui[class*="tablet stackable"].table tr > td {
-    width: 100% !important;
-    display: block !important;
-  }
-  .ui[class*="tablet stackable"].table {
-    padding: 0em;
-  }
-  .ui[class*="tablet stackable"].table thead {
-    display: block;
-  }
-  .ui[class*="tablet stackable"].table tfoot {
-    display: block;
-  }
-  .ui[class*="tablet stackable"].table tr {
-    padding-top: 1em;
-    padding-bottom: 1em;
-    -webkit-box-shadow: 0px -1px 0px 0px rgba(0, 0, 0, 0.1) inset !important;
-            box-shadow: 0px -1px 0px 0px rgba(0, 0, 0, 0.1) inset !important;
-  }
-  .ui[class*="tablet stackable"].table tr > th,
-  .ui[class*="tablet stackable"].table tr > td {
-    background: none;
-    border: none !important;
-    padding: 0.25em 0.75em;
-    -webkit-box-shadow: none !important;
-            box-shadow: none !important;
-  }
+/*@media only screen and (max-width: 991px) {*/
+/*  .ui[class*="tablet stackable"].table,*/
+/*  .ui[class*="tablet stackable"].table tbody,*/
+/*  .ui[class*="tablet stackable"].table tr,*/
+/*  .ui[class*="tablet stackable"].table tr > th,*/
+/*  .ui[class*="tablet stackable"].table tr > td {*/
+/*    width: 100% !important;*/
+/*    display: block !important;*/
+/*  }*/
+/*  .ui[class*="tablet stackable"].table {*/
+/*    padding: 0em;*/
+/*  }*/
+/*  .ui[class*="tablet stackable"].table thead {*/
+/*    display: block;*/
+/*  }*/
+/*  .ui[class*="tablet stackable"].table tfoot {*/
+/*    display: block;*/
+/*  }*/
+/*  .ui[class*="tablet stackable"].table tr {*/
+/*    padding-top: 1em;*/
+/*    padding-bottom: 1em;*/
+/*    -webkit-box-shadow: 0px -1px 0px 0px rgba(0, 0, 0, 0.1) inset !important;*/
+/*            box-shadow: 0px -1px 0px 0px rgba(0, 0, 0, 0.1) inset !important;*/
+/*  }*/
+/*  .ui[class*="tablet stackable"].table tr > th,*/
+/*  .ui[class*="tablet stackable"].table tr > td {*/
+/*    background: none;*/
+/*    border: none !important;*/
+/*    padding: 0.25em 0.75em;*/
+/*    -webkit-box-shadow: none !important;*/
+/*            box-shadow: none !important;*/
+/*  }*/
 
-/* Definition Table */
-  .ui.definition[class*="tablet stackable"].table thead th:first-child {
-    -webkit-box-shadow: none !important;
-            box-shadow: none !important;
-  }
-}
+/*!* Definition Table *!*/
+/*  .ui.definition[class*="tablet stackable"].table thead th:first-child {*/
+/*    -webkit-box-shadow: none !important;*/
+/*            box-shadow: none !important;*/
+/*  }*/
+/*}*/
 
 /*--------------
  Text Alignment

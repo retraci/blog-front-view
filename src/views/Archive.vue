@@ -1,53 +1,29 @@
 <template>
   <div class="archive">
-    <div class="atrtitle count" style="text-align: center">
-      <h2>文章归档</h2>
-      <p>目前共计<strong> {{ blogcount }} </strong>篇公开文章！ 继续努力！</p>
-    </div>
     <el-row id="artList" type="flex" justify="space-around">
       <el-col :span="16">
-        <div class="block">
-          <el-timeline>
-            <el-timeline-item
-              placement="top"
-              v-for="archive in archives"
-              v-bind:key="archive.blog_id"
-              v-bind:timestamp="archive.create_time"
-              size="large"
-              icon="el-icon-more"
-              type="primary"
-              class="timeItem"
-            >
+        <el-row id="time-line-br"></el-row>
+        <el-row class="block animate">
+          <div>
+            <el-timeline>
+              <el-timeline-item
+                  v-for="archive in archives"
+                  v-bind:key="archive.blog_id"
+                  size="large"
+                  type="primary"
+                  class="timeItem"
+              >
+                <el-tag class="date-tag" type="success"> {{ archive.blog_id }}</el-tag>
                 <router-link
-                class="line-item"
-                  :to="{name: 'article', params: {blogId: archive.blog_id}}"
-                >{{archive.blog_title}}</router-link>
-          
-            </el-timeline-item>
-          </el-timeline>
-        </div>
-        <el-pagination
-          @current-change="getArchive"
-          :current-page="currentPage"
-          :page-count="total"
-          layout="prev, pager, next"
-          background
-          hide-on-single-page
-        ></el-pagination>
-      </el-col>
-       <el-col :span="6" class="hidden-sm-and-down" id="side">
-        <div class="item">
-          <Introduction />
-        </div>
-        <div class="item">
-          <categorys />
-        </div>
-        <div class="item">
-          <tags />
-        </div>
-        <div class="item">
-          <FriendSider />
-        </div>
+                    class="line-item"
+                    :to="{name: 'article', params: {blogId: archive.blog_id}}"
+                >
+                  {{ archive.blog_title }}
+                </router-link>
+              </el-timeline-item>
+            </el-timeline>
+          </div>
+        </el-row>
       </el-col>
     </el-row>
   </div>
@@ -61,7 +37,7 @@ export default {
     return {
       archives: {},
       currentPage: 1,
-      pageSize: 5,
+      pageSize: 999,
       total: 0,
       blogcount: 0
     };
@@ -70,17 +46,17 @@ export default {
     getArchive(currentPage) {
       const _this = this;
       this.$axios
-        .get("/blogArchive", {
-          params: {
-            currentPage: currentPage
-          }
-        })
-        .then(res => {
-          // console.log(res.data.data)
-          _this.archives = res.data.data;
-          _this.currentPage = res.data.currentPage;
-          _this.total = res.data.totalPage;
-        });
+          .get("/blogArchive", {
+            params: {
+              currentPage: currentPage
+            }
+          })
+          .then(res => {
+            // console.log(res.data.data)
+            _this.archives = res.data.data;
+            _this.currentPage = res.data.currentPage;
+            _this.total = res.data.totalPage;
+          });
     },
     getBlogCnt() {
       const _this = this;
@@ -91,23 +67,41 @@ export default {
     }
   },
   mounted() {
-    this.getArchive(1);
-    this.getBlogCnt();
+    this.getArchive(1)
+    this.getBlogCnt()
   }
 };
 </script>
 
-<style>
+<style lang="less">
+
+.date-tag {
+  margin-right: 15px;
+  width: 35px;
+  height: 22px;
+  text-align: center;
+  line-height: 22px;
+}
+
+#time-line-br {
+  width: 100%;
+  margin: 120px 0;
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(90deg, transparent, rgba(255, 109, 109, .75), transparent);
+}
+
 #side .item {
   margin-bottom: 30px;
 }
+
 .line-item {
   display: inline-block;
   color: #000;
   font-size: 15px;
   font-weight: 400;
-  padding-bottom: 20px;
-  padding-top: 20px;
+  /*padding-bottom: 20px;*/
+  /*padding-top: 20px;*/
   text-decoration: none;
 }
 
@@ -115,7 +109,7 @@ export default {
   cursor: pointer;
   color: #409eff;
   transform: translateX(10px);
-  transition:all 1s;
+  transition: all 1s;
   -webkit-line-clamp: 2;
 }
 
@@ -124,10 +118,11 @@ export default {
   font-size: 20px;
   color: #e6a23c;
 }
-@media screen and (min-width: 320px) and (max-width: 750px) {
-  .atrtitle {
-    margin-top: 50px;
-  }
-}
+
+//@media screen and (min-width: 320px) and (max-width: 750px) {
+//  .atrtitle {
+//    margin-top: 50px;
+//  }
+//}
 
 </style>

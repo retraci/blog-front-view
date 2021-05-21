@@ -2,38 +2,44 @@
   <div id="head-component">
     <div id="layout-header" :class="{'fixed':fixed,'hidden':hidden}">
       <el-menu
-        :default-active="activeIndex"
-        class="d-flex nav-menu"
-        mode="horizontal"
-        :router="true"
-        type="flex"
+          class="d-flex nav-menu"
+          mode="horizontal"
+          :router="true"
+          type="flex"
+          active-text-color="fff"
+          text-color="409EFF"
       >
-        <el-menu-item index="/home" class="mr-auto hidden-sm-and-down" style="color:#409EFF;font-size:25px;">{{siteInfo.blogName}}</el-menu-item>
-        <el-menu-item id="searchItem">
+        <el-menu-item index="/home" class="mr-auto hidden-sm-and-down no-select"
+                      style="color:var(--theme-color); font-size:25px;">
+          {{ siteInfo.blogName }}
+        </el-menu-item>
+        <el-menu-item id="searchItem" class="no-select">
           <header-search ref="HeaderSearch"></header-search>
         </el-menu-item>
-        <el-menu-item index="/home">首页</el-menu-item>
-        <el-submenu :show-timeout="100" :hide-timeout="100" index class="hidden-sm-and-down">
-          <template slot="title">分类</template>
-          <el-menu-item
-            v-for="category in categorys"
-            :key="category.category_id"
+        <el-menu-item index="/home" class="no-select menu-item">首页</el-menu-item>
+        <el-submenu :show-timeout="100" :hide-timeout="100" index
+                    class="no-select">
+          <template slot="title"><span class="menu-item">分类</span></template>
+          <el-menu-item class="no-select menu-item"
+                        v-for="category in categorys"
+                        :key="category.category_id"
           >
             <router-link
-              :to="{
+                :to="{
               name: 'category',
               params: {cateId: category.category_id, cateName: category.category_name}}"
-              tag="div"
-            >{{category.category_name}}</router-link>
+                tag="div"
+            >{{ category.category_name }}
+            </router-link>
           </el-menu-item>
         </el-submenu>
-        <el-menu-item index="/archive">归档</el-menu-item>
+        <el-menu-item index="/archive" class="no-select menu-item">归档</el-menu-item>
       </el-menu>
     </div>
     <div id="banner" class="home-banner">
       <div
-        class="banner-img"
-        v-bind:style="{backgroundImage:'url(' +siteInfo.backgroundImage + ')'}"
+          class="banner-img"
+          v-bind:style="{backgroundImage:'url(' +siteInfo.backgroundImage + ')'}"
       >
         <template>
           <!--左右倾斜-->
@@ -94,12 +100,12 @@ export default {
     getCategoryIdAndTitle() {
       const _this = this;
       this.$axios
-        .get("/getAllCategory")
-        .then(res => {
-          //  console.log(res.data.data);
-          _this.categorys = res.data.data;
-          console.log(res.data.data);
-        });
+          .get("/getAllCategory")
+          .then(res => {
+            //  console.log(res.data.data);
+            _this.categorys = res.data.data;
+            console.log(res.data.data);
+          });
     },
     watchScroll() {
       // 获取距离顶部的距离
@@ -156,6 +162,7 @@ export default {
     position: relative;
     width: 100%;
     height: 500px;
+
     .banner-img {
       width: inherit;
       height: inherit;
@@ -164,13 +171,16 @@ export default {
       background-repeat: no-repeat;
       transition: all 0.2s linear;
       overflow: hidden;
+
       &:hover {
         transform: scale(1.1, 1.1);
         filter: contrast(130%);
       }
     }
+
     &.home-banner {
       height: 550px;
+
       .banner-img {
         background-position: center center;
         background-repeat: no-repeat;
@@ -178,11 +188,13 @@ export default {
         background-size: cover;
         z-index: -1;
         transition: unset;
+
         &:hover {
           transform: unset;
           filter: unset;
         }
       }
+
       .slant-left {
         content: "";
         position: absolute;
@@ -193,6 +205,7 @@ export default {
         left: 0;
         bottom: 0;
       }
+
       .slant-right {
         content: "";
         position: absolute;
@@ -215,12 +228,14 @@ export default {
     transform: translate(-50%, -50%);
     -webkit-transform: translate(-50%, -50%);
     text-align: center;
+
     img {
       width: 80px;
       height: auto;
       border-radius: 50%;
       border: 3px solid rgba(255, 255, 255, 0.3);
     }
+
     .header-info {
       width: 60%;
       font-size: 14px;
@@ -233,6 +248,7 @@ export default {
       letter-spacing: 1px;
       line-height: 30px;
     }
+
     .top-social {
       height: 32px;
       margin-top: 30px;
@@ -241,6 +257,7 @@ export default {
       display: inline-block;
       font-family: miranafont, "Hiragino Sans GB", STXihei, "Microsoft YaHei",
       SimSun, sans-serif;
+
       div {
         float: left;
         margin-right: 10px;
@@ -248,6 +265,7 @@ export default {
         line-height: 32px;
         text-align: center;
         width: 32px;
+
         img {
           width: 32px;
           height: 32px;
@@ -263,16 +281,16 @@ export default {
     }
   }
 
-  @media (max-width: 960px) {
-    #banner {
-      height: 400px;
-    }
-  }
-  @media (max-width: 800px) {
-    #banner {
-      display: none;
-    }
-  }
+  //@media (max-width: 960px) {
+  //  #banner {
+  //    height: 400px;
+  //  }
+  //}
+  //@media (max-width: 800px) {
+  //  #banner {
+  //    display: none;
+  //  }
+  //}
 
 }
 

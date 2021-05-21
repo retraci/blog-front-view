@@ -1,5 +1,5 @@
 <template>
-  <div class="app">
+  <div id="app">
     <div class="rg-table-box">
       <Head :class="{'navBarWrap':navBarFixed}" :siteInfo="siteInfo"></Head>
       <el-row type="flex" justify="center" id="content">
@@ -102,7 +102,7 @@ export default {
 </script>
 
 <style scoped>
-.app {
+#app {
   font-family: "microsoft yahei";
   background-color: #f9f9f9;
 }
@@ -113,12 +113,12 @@ export default {
 
 }
 
-@media screen and (min-width: 320px) and (max-width: 750px) {
-  #content {
-    background-color: #f9f9f9;
-    padding: 100px 0;
-  }
-}
+/*@media screen and (min-width: 320px) and (max-width: 750px) {*/
+/*  #content {*/
+/*    background-color: #f9f9f9;*/
+/*    padding: 100px 0;*/
+/*  }*/
+/*}*/
 
 </style>
 
