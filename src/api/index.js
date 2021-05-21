@@ -3,7 +3,7 @@ import {PageData} from '@/plugins/ax'
 
 /*==============app==================*/
 export function fetchSiteInfo(data) {
-    return axios.get("/siteInfo", data)
+    // return axios.get("/siteInfo", data)
 
     return new Promise((resolve => {
         setTimeout(() => {
@@ -14,11 +14,11 @@ export function fetchSiteInfo(data) {
 
 /*================layout-header================*/
 export function fetchAllCategory(data) {
-    return axios.get("/getAllCategory", data)
+    // return axios.get("/getAllCategory", data)
 
     return new Promise((resolve => {
         setTimeout(() => {
-            return resolve(JSON.parse(PageData().allCategory))
+            return resolve(PageData().allCategory)
         }, 100)
     }))
 }
@@ -29,23 +29,23 @@ export function fetchBlogArchive(data) {
 }
 
 export function fetchBlogsCount(data) {
-    return axios.get("/blogsCount", data)
+    // return axios.get("/blogsCount", data)
 
     return new Promise(resolve => {
         setTimeout(() => {
-            return resolve((JSON.parse(PageData().blogsCount)))
+            return resolve((PageData().blogsCount))
         }, 100)
     })
 }
 
 /*======================Article======================*/
 export function fetchBlog(blogId) {
-    console.log(blogId)
+    // console.log(blogId)
     // return axios.get("/blog/" + blogId)
 
     return new Promise((resolve => {
         setTimeout(() => {
-            return resolve(JSON.parse(PageData().blogs[blogId]))
+            return resolve(PageData().blogs[blogId])
         }, 100)
     }))
 }
@@ -64,6 +64,7 @@ export function fetchBlogList(data) {
 export function fetchBlogListByCategory(data) {
     // return axios.get("/blogList", data)
 
+    // console.log(PageData().allBlogs.data.data)
     return new Promise((resolve => {
         setTimeout(() => {
             return resolve(PageData().categorys[data.params.cateId][data.params.currentPage])

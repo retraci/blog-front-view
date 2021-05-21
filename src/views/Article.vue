@@ -105,7 +105,6 @@ export default {
       const that = this
 
       fetchBlog(blogId).then(res => {
-        // console.log(JSON.stringify(res))
 
         // console.log(res.data.data)
         if (res.data.code === 200) {

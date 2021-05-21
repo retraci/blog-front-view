@@ -6,7 +6,7 @@
         <!--通知栏-->
         <el-card id="notify" v-if="showNotify">
           <span v-if="searchWords">搜索结果: "{{ searchWords }}" 相关文章</span>
-          <span v-else-if="category">分类: "{{ category }}" 相关文章</span>
+          <span v-else-if="category">分类: "{{ cateName }}" 相关文章</span>
         </el-card>
 
         <el-row
@@ -99,6 +99,7 @@ export default {
       // screenWidth: document.body.clientWidth,
 
       animateShow: true,
+      cateName: '',
     }
   },
   computed: {
@@ -126,8 +127,10 @@ export default {
 
       if (data.params.cateId) {
         fetchBlogListByCategory(data).then(res => {
+          console.log(res.data)
+
           that.blogs = res.data.data
-          // console.log(res.data.data)
+          that.cateName = res.data.category_name
           that.currentPage = res.data.currentPage
           that.total = res.data.totalPage
 
@@ -135,7 +138,6 @@ export default {
         })
       } else if (data.params.word) {
         fetchBlogListByWords(data).then(res => {
-          console.log(res)
           that.blogs = res.data.data
           // console.log(res.data.data)
           that.currentPage = res.data.currentPage
