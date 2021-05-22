@@ -175,7 +175,7 @@
     font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
 }
 div .code-toolbar > .toolbar {
-    color: var(--typo-prism-btn-color);
+    /*color: var(--typo-prism-btn-color);*/
 }
 
 /* 一致化 horizontal rule */

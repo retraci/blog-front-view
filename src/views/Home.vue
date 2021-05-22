@@ -1,12 +1,11 @@
 <template>
-  <div id="home-page" :class="animateShow ? 'animate' : ''">
-
-    <el-row type="flex" justify="space-around">
+  <div id="home-page" v-if="homePageShow">
+    <el-row type="flex" justify="space-around" :class="animateShow ? 'animate' : ''">
       <el-col :span="16">
         <!--通知栏-->
         <el-card id="notify" v-if="showNotify">
-          <span v-if="searchWords">搜索结果: "{{ searchWords }}" 相关文章</span>
-          <span v-else-if="category">分类: "{{ cateName }}" 相关文章</span>
+          <span v-if="pageWord">搜索结果: "{{ pageWord }}" 相关文章</span>
+          <span v-else-if="pageCateId">分类: "{{ cateName }}" 相关文章</span>
         </el-card>
 
         <el-row
@@ -62,7 +61,7 @@
         </el-row>
         <div class="pagination">
           <el-pagination
-              @current-change="page"
+              @current-change="pageChanging"
               :current-page="currentPage"
               :page-count="total"
               layout="prev, pager, next"
@@ -79,6 +78,7 @@
 import Banner from "@/components/banner"
 import {fetchBlogList, fetchBlogListByCategory, fetchBlogListByWords} from "@/api";
 import Element from "element-ui";
+import {mapState} from "vuex";
 
 export default {
   name: "Home",
@@ -93,57 +93,54 @@ export default {
   data() {
     return {
       blogs: {},
-      currentPage: 1,
       total: 0,
       pageSize: 5,
       // screenWidth: document.body.clientWidth,
 
-      animateShow: true,
       cateName: '',
+      animateShow: true,
+      homePageShow: false,
     }
   },
   computed: {
-    searchWords() {
-      return this.$route.params.words
+    page() {
+      return this.$route.params.page
     },
-    category() {
-      return this.$route.params.cateId
+    pageWord() {
+      return this.$route.params.pageWord
+    },
+    pageCateId() {
+      return this.$route.params.pageCateId
     },
     showNotify() {
-      return this.category || this.searchWords
+      return this.pageCateId || this.pageWord
     },
     notice() {
       return this.$store.getters.notice
     }
   },
   methods: {
-    showAnimation() {
+    showPage() {
+      this.homePageShow = true
       this.animateShow = true
     },
     getBlogList(data) {
       const that = this
 
-      console.log(data)
-
       if (data.params.cateId) {
         fetchBlogListByCategory(data).then(res => {
-          console.log(res.data)
-
           that.blogs = res.data.data
           that.cateName = res.data.category_name
           that.currentPage = res.data.currentPage
           that.total = res.data.totalPage
-
-          this.showAnimation()
+          this.showPage()
         })
       } else if (data.params.word) {
         fetchBlogListByWords(data).then(res => {
           that.blogs = res.data.data
-          // console.log(res.data.data)
           that.currentPage = res.data.currentPage
           that.total = res.data.totalPage
-
-          this.showAnimation()
+          this.showPage()
         }).catch(err => {
           Element.Message({
             message: err,
@@ -154,42 +151,63 @@ export default {
       } else {
         fetchBlogList(data).then(res => {
           that.blogs = res.data.data
-          // console.log(res.data.data)
           that.currentPage = res.data.currentPage
           that.total = res.data.totalPage
-
-          this.showAnimation()
+          this.showPage()
         })
       }
     },
-    page(currentPage) {
+    pageChanging(currentPage) {
       let data = {
+        name: 'home',
         params: {
-          currentPage: currentPage,
-          word: this.searchWords,
-          cateId: this.category
+          page: currentPage
         }
       }
-      this.getBlogList(data)
-      this.scrollToTop()
-    }
+      if (this.showNotify) {
+        if (this.pageWord) {
+          data.name = 'search'
+          data.params = {
+            page: currentPage,
+            pageWord: this.pageWord
+          }
+        } else {
+          data.name = 'category'
+          data.params = {
+            page: currentPage,
+            pageCateId: this.pageCateId
+          }
+        }
+      }
+      // console.log(data)
+      this.$router.push(data)
+    },
   },
   mounted() {
-    const that = this
-    that.page(1)
+    let data = {
+      params: {
+        currentPage: this.page,
+        word: this.pageWord,
+        cateId: this.pageCateId
+      }
+    }
+    console.log(data)
+    this.getBlogList(data)
   },
   watch: {
     $route(e) {
-      console.log(e)
+      // console.log(e)
       this.animateShow = false
+      this.homePageShow = false
 
       let data = {
         params: {
-          currentPage: 1,
-          word: this.searchWords,
-          cateId: this.category
+          currentPage: this.page,
+          word: this.pageWord,
+          cateId: this.pageCateId
         }
       }
+      console.log(data)
       this.getBlogList(data)
     },
   }
@@ -211,7 +229,6 @@ export default {
     &:not(:first-child) {
       margin-top: 1.5rem;
     }
-    z-index: 2;
 
     /*=============卡片=============*/
 

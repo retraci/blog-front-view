@@ -5,7 +5,7 @@ import VueRouter from 'vue-router'
 import Element from 'element-ui'
 import SmoothScroll from 'smoothscroll-for-websites'
 import store from './store'
-import axios from '@/plugins/axios'
+import VueParticles from 'vue-particles'
 import "element-ui/lib/theme-chalk/index.css"
 import 'element-ui/lib/theme-chalk/display.css'
 import './assets/style.css'
@@ -14,7 +14,7 @@ import "./assets/global.less"
 
 Vue.use(VueRouter)
 Vue.use(Element)
-Vue.prototype.$axios = axios
+Vue.use(VueParticles)
 
 // SmoothScroll 的参数
 const options = {
@@ -33,8 +33,8 @@ const options = {
 }
 SmoothScroll(options)
 
-const cubic = value => Math.pow(value, 3);
-const easeInOutCubic = value => value < 0.5 ? cubic(value * 2) / 2 : 1 - cubic((1 - value) * 2) / 2;
+const cubic = value => Math.pow(value, 3)
+const easeInOutCubic = value => value < 0.5 ? cubic(value * 2) / 2 : 1 - cubic((1 - value) * 2) / 2
 Vue.prototype.scrollToTop = function () {
 	const el = document.documentElement
 	const beginTime = Date.now()

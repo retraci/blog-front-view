@@ -5,6 +5,12 @@
         v-bind:style="{backgroundImage:'url(' +siteInfo.backgroundImage + ')'}"
     >
       <template>
+        <div class="focusinfo">
+          <!-- 简介 -->
+          <div class="header-info">
+            <div class="type-animation no-select">Be hungry,be foolish.</div>
+          </div>
+        </div>
         <!--左右倾斜-->
         <div class="slant-left"></div>
         <div class="slant-right"></div>
@@ -35,19 +41,34 @@ export default {
     };
   },
   mounted() {
+    this.showTyping()
   },
   beforeDestroy() {
   },
-  methods: {},
-};
+  methods: {
+    showTyping() {
+      const element = document.getElementsByClassName('type-animation')[0]
+      element.innerHTML = element.textContent
+          .replace(/\S/g, "<type-animation-item>$&</type-animation-item>")
+          .replace(/\s/g, "<type-animation-item>&nbsp;</type-animation-item>")
+
+      let delay = 0
+      document.querySelectorAll('type-animation-item').forEach((item, idx) => {
+        delay += 0.1
+        if (idx === 2 || idx === 9 || idx === 12) delay += 0.2
+        item.style.setProperty('--delay', `${delay}s`)
+      })
+    }
+  },
+}
 </script>
 
 <style lang="less">
 #banner {
+  z-index: 2;
   position: relative;
   width: 100%;
   height: 500px;
-  z-index: 2;
 
   .banner-img {
     width: inherit;
@@ -78,6 +99,29 @@ export default {
       &:hover {
         transform: unset;
         filter: unset;
+      }
+    }
+    .focusinfo {
+      position: relative;
+      max-width: 800px;
+      padding: 0 10px;
+      top: 55%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      -webkit-transform: translate(-50%, -50%);
+      text-align: center;
+
+      & .header-info {
+        width: 60%;
+        font-size: 14px;
+        color: #eaeadf;
+        background: rgba(0, 0, 0, 0.4);
+        padding: 20px 30px;
+        margin: 30px auto 0 auto;
+        font-family: miranafont, "Hiragino Sans GB", STXihei, "Microsoft YaHei",
+        SimSun, sans-serif;
+        letter-spacing: 1px;
+        line-height: 30px;
       }
     }
 

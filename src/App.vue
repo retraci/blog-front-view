@@ -9,7 +9,6 @@
 import LayoutBody from "@/components/layout/layout-body"
 import LayoutHeader from "@/components/layout/layout-header"
 import {fetchBlogList, fetchSiteInfo} from "@/api"
-// import CanvasNest from "canvas-nest.js"
 
 export default {
   name: "app",
@@ -27,17 +26,12 @@ export default {
       newBlogs: [],
       hitokoto: '',
 
-      config: {
-        color: "0, 0, 0",
-        opacity: 0.7,
-        zIndex: 1,
-        count: 99,
-      }
+      particlesShow: false,
     };
   },
   components: {
     LayoutHeader,
-    LayoutBody
+    LayoutBody,
   },
   methods: {
     getSiteSetting() {
@@ -72,8 +66,8 @@ export default {
   },
   mounted() {
     const that = this
-    that.minHeight = document.documentElement.clientHeight
 
+    that.minHeight = document.documentElement.clientHeight
     window.addEventListener("scroll", that.watchScroll)
     window.onresize = function () {
       that.minHeight = document.documentElement.clientHeight
@@ -87,8 +81,19 @@ export default {
   },
   watch: {
     '$route': function (to, from) {
-      document.body.scrollTop = 0
-      document.documentElement.scrollTop = 0
+      if (to.name === 'article' || to.name === 'archive') {
+        this.$store.dispatch('setIsHome', false)
+      } else {
+        this.$store.dispatch('setIsHome', true)
+      }
+
+      if (to.name === 'archive') {
+        this.$store.dispatch('setIsNotArchive', false)
+      } else {
+        this.$store.dispatch('setIsNotArchive', true)
+      }
+
+      if (from.name !== 'article') document.body.scrollTop = document.documentElement.scrollTop = 0
     }
   }
 }

@@ -5,6 +5,9 @@ export default {
 		name: '',
 		rollText: [],
 	},
-	//博客文章渲染完成的标记
-	isBlogRenderComplete: false
+	// 博客渲染完成的标记
+	isBlogRenderComplete: false,
+
+	isHome: false,
+	isNotArchive: false,
 }

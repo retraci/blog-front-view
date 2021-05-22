@@ -468,7 +468,7 @@ export function PageData() {
                         "loginUrl": "https://admin.datealive.top/",
                         "beian": "粤ICP备20036790号-1 ",
                         "headAvatar": "https://gitee.com/zhangrenfeng/images/raw/master/blogImg/1618568996679_5b9c0dca-61c0-405b-973a-adcdc698e058.jpg",
-                        "headInfo": "若似月轮终皎洁，不辞冰雪为卿热。",
+                        "headInfo": "Coding",
                         "webTitleSuffix": " - Hi-Dream\'s Blog",
                         "footerImgTitle": "博客交流群",
                         "footerImgUrl": "https://gitee.com/zhangrenfeng/images/raw/master/img/20210228135547.jpg"
@@ -1743,6 +1743,145 @@ export function PageData() {
                     "request": {}
                 }
             },
+        },
+        bolgArchive: {
+            "data": {
+                "code": 200,
+                "totalPage": 1,
+                "currentPage": 1,
+                "data": [
+                    {
+                        month: "2021-04",
+                        arr: [
+                            {
+                                "blog_id": 29,
+                                "blog_title": "Redis学习总结",
+                                "create_time": "2021-04-05 12:52",
+                                "day": "05"
+                            },
+                        ]
+                    },
+                    {
+                        month: "2021-03",
+                        arr: [
+                            {
+                                "blog_id": 28,
+                                "blog_title": "JVM性能分析器-JProfiler的使用",
+                                "create_time": "2021-03-23 08:40",
+                                "day": "23"
+                            },
+                            {
+                                "blog_id": 27,
+                                "blog_title": "JVM调优参数记录（持续更新）",
+                                "create_time": "2021-03-23 07:56",
+                                "day": "23"
+                            },
+                            {
+                                "blog_id": 26,
+                                "blog_title": "JVM垃圾回收",
+                                "create_time": "2021-03-23 07:53",
+                                "day": "23"
+                            },
+                            {
+                                "blog_id": 25,
+                                "blog_title": "JVM学习之双亲委派模型",
+                                "create_time": "2021-03-20 13:11",
+                                "day": "20"
+                            },
+                            {
+                                "blog_id": 24,
+                                "blog_title": "记spring读取properties文件username报错问题",
+                                "create_time": "2021-03-07 05:44",
+                                "day": "07"
+                            },
+                            {
+                                "blog_id": 23,
+                                "blog_title": "认证授权篇之JWT详解",
+                                "create_time": "2021-03-06 08:48",
+                                "day": "06"
+                            },
+                            {
+                                "blog_id": 22,
+                                "blog_title": "学习笔记——认证授权基础篇",
+                                "create_time": "2021-03-03 08:44",
+                                "day": "03"
+                            },
+
+                        ]
+                    },
+                    {
+                        month: "2021-02",
+                        arr: [
+                            {
+                                "blog_id": 21,
+                                "blog_title": "学习笔记——数据脱敏",
+                                "create_time": "2021-02-28 15:39",
+                                "day": "28"
+                            },
+                            {
+                                "blog_id": 8,
+                                "blog_title": "Linux基础命令笔记",
+                                "create_time": "2021-02-13 03:42",
+                                "day": "13"
+                            },
+                            {
+                                "blog_id": 7,
+                                "blog_title": "Python3爬虫实战【点触验证码】 — 模拟登陆bilibili",
+                                "create_time": "2021-02-13 03:35",
+                                "day": "13"
+                            },
+                            {
+                                "blog_id": 6,
+                                "blog_title": "设计模式之单例模式",
+                                "create_time": "2021-02-13 03:33",
+                                "day": "13"
+                            },
+                            {
+                                "blog_id": 5,
+                                "blog_title": "神秘国度的爱情故事（树剖+lca）",
+                                "create_time": "2021-02-13 03:19",
+                                "day": "13"
+                            },
+                            {
+                                "blog_id": 4,
+                                "blog_title": "JVM——Java内存区域",
+                                "create_time": "2021-02-13 03:11",
+                                "day": "13"
+                            },
+                            {
+                                "blog_id": 3,
+                                "blog_title": "springboot+vue博客项目上线啦",
+                                "create_time": "2021-02-12 22:50",
+                                "day": "12"
+                            },
+                            {
+                                "blog_id": 2,
+                                "blog_title": "冰雪林中著此身，不同桃李混芳尘",
+                                "create_time": "2021-02-12 22:46",
+                                "day": "12"
+                            }
+                        ]
+                    },
+                ]
+            },
+            "status": 200,
+            "statusText": "",
+            "headers": {"content-length": "309", "content-type": "application/json"},
+            "config": {
+                "url": "/blogArchive",
+                "method": "get",
+                "headers": {"Accept": "application/json, text/plain, */*"},
+                "params": {"currentPage": 1},
+                "baseURL": "https://api.datealive.top",
+                "transformRequest": [null],
+                "transformResponse": [null],
+                "timeout": 0,
+                "xsrfCookieName": "XSRF-TOKEN",
+                "xsrfHeaderName": "X-XSRF-TOKEN",
+                "maxContentLength": -1,
+                "maxBodyLength": -1
+            },
+            "request": {}
         },
 
         allBlogs: {

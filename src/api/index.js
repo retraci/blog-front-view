@@ -25,7 +25,13 @@ export function fetchAllCategory(data) {
 
 /*======================Archive======================*/
 export function fetchBlogArchive(data) {
-    return axios.get("/blogArchive", data)
+    // return axios.get("/blogArchive", data)
+
+    return new Promise(resolve => {
+        setTimeout(() => {
+            return resolve((PageData().bolgArchive))
+        }, 100)
+    })
 }
 
 export function fetchBlogsCount(data) {
@@ -42,6 +48,10 @@ export function fetchBlogsCount(data) {
 export function fetchBlog(blogId) {
     // console.log(blogId)
     // return axios.get("/blog/" + blogId)
+
+    if (typeof PageData().blogs[blogId] === 'undefined') return new Promise((resolve, reject) => {
+        return reject('试试别的文章吧, 这个文章没数据')
+    })
 
     return new Promise((resolve => {
         setTimeout(() => {

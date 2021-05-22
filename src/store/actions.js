@@ -2,8 +2,9 @@ import {
 	SAVE_SITE_INFO,
 	SAVE_INTRODUCTION,
 	SET_IS_BLOG_RENDER_COMPLETE,
-} from "./mutations-types";
-
+	SET_IS_HOME,
+	SET_IS_NOT_ARCHIVE,
+} from "./mutations-types"
 
 export default {
 	saveSiteInfo({commit}, siteInfo) {
@@ -14,5 +15,13 @@ export default {
 	},
 	setIsBlogRenderComplete({commit}, ok) {
 		commit(SET_IS_BLOG_RENDER_COMPLETE, {ok})
-	}
+	},
+
+	setIsHome({commit}, s) {
+		commit(SET_IS_HOME, {s})
+	},
+	setIsNotArchive({commit}, s) {
+		commit(SET_IS_NOT_ARCHIVE, {s})
+	},
+
 }

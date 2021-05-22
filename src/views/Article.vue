@@ -1,6 +1,6 @@
 <template>
-  <div id="article-page">
-    <el-row id="artList" class="animate" type="flex" justify="space-around">
+  <div id="article-page" v-if="articlePageShow">
+    <el-row id="artList" type="flex" justify="space-around" class="animate">
       <!--文章-->
       <el-col :span="16">
         <el-row class="art-item">
@@ -45,9 +45,10 @@
 </template>
 
 <script>
-import {mapState} from "vuex";
-import Tocbot from "@/components/Tocbot";
-import {fetchBlog} from "@/api";
+import {mapState} from "vuex"
+import Tocbot from "@/components/Tocbot"
+import {fetchBlog} from "@/api"
+import Element from "element-ui"
 
 export default {
   name: "articledetail",
@@ -59,11 +60,13 @@ export default {
       },
       blog: {},
       // screenWidth: document.body.clientWidth,
-      url: window.location.href
+      url: window.location.href,
+
+      articlePageShow: false
     };
   },
   components: {
-    Tocbot
+    Tocbot,
   },
   computed: {
     blogId() {
@@ -95,7 +98,7 @@ export default {
     if (to.path !== from.path) {
       this.getBlog(to.params.blogId)
       // console.log(to.params.blogId)
-      //只要路由路径有改变，且停留在当前Blog组件内，就把文章的渲染完成状态置为 false
+      // 只要路由路径有改变，且停留在当前Blog组件内，就把文章的渲染完成状态置为 false
       this.$store.dispatch('setIsBlogRenderComplete', false)
       next()
     }
@@ -105,37 +108,42 @@ export default {
       const that = this
 
       fetchBlog(blogId).then(res => {
+        that.blog = res.data.data
+        that.propsData.blog_id = res.data.data.blog_id
+        document.title = that.blog.blog_title + that.siteInfo.webTitleSuffix
+        this.articlePageShow = true
 
-        // console.log(res.data.data)
-        if (res.data.code === 200) {
-          that.blog = res.data.data
-          that.propsData.blog_id = res.data.data.blog_id
-          that.$nextTick(() => {
-            Prism.highlightAll()
-            this.$store.dispatch('setIsBlogRenderComplete', true)
-          });
-          document.title = that.blog.blog_title + that.siteInfo.webTitleSuffix
-        }
+        that.$nextTick(() => {
+          Prism.highlightAll()
+          this.$store.dispatch('setIsBlogRenderComplete', true)
+        })
+      }).catch(err => {
+        Element.Message({
+          message: err,
+          type: 'error',
+          duration: 2 * 1000
+        })
+      })
 
-      });
-      this.scrollToTop();
-      // console.log(blogId);
+      this.scrollToTop()
     },
   },
   created() {
-    this.getBlog();
+    this.getBlog()
   },
   mounted() {
   },
-  watch: {}
-};
+  beforeDestroy() {
+  },
+  watch: {
+  }
+}
 </script>
 
 <style lang="less">
 #article-page {
   /*===========文章信息===========*/
   & .art-item {
-    z-index: 2;
   }
 
   & #artcle-info {
@@ -208,7 +216,6 @@ export default {
 
   & #side .side-item {
     margin-bottom: 30px;
-    z-index: 2;
   }
 
   & .is-position-fixed {

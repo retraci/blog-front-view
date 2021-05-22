@@ -11,10 +11,10 @@ const routes = [
     meta: { title: '首页' }
   },
   {
-    path: '/home',
+    path: '/home/:page',
     name: 'home',
     component: () => import('@/views/Home'),
-    meta: { title: '首页' }
+    meta: { title: '首页' , params: 'page' }
   },
   {
     path: '/archive',
@@ -26,21 +26,19 @@ const routes = [
     path: '/article/:blogId',
     name: 'article',
     component: () => import('@/views/Article'),
-    meta: {
-      title: '文章'
-    }
+    meta: { title: '文章' }
   },
   {
-    path: '/search/:words',
+    path: '/search/:pageWord/:page',
     name: 'search',
     component: () => import('../views/Home'),
-    meta: { title: '搜索', params: 'words'}
+    meta: { title: '搜索', params: ['pageWord', 'page'] }
   },
   {
-    path: '/category/:cateId',
+    path: '/category/:pageCateId/:page',
     name: 'category',
     component: () => import('../views/Home'),
-    meta: { title: '分类', params: 'cateId'}
+    meta: { title: '分类', params: ['pageCateId', 'page'] }
   },
 ]
 

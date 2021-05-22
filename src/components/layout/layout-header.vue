@@ -7,14 +7,14 @@
         type="flex"
         active-text-color="fff"
     >
-      <el-menu-item index="/home" class="mr-auto hidden-sm-and-down no-select"
+      <el-menu-item index="/home/1" class="mr-auto hidden-sm-and-down no-select"
                     style="color:var(--theme-color); font-size:25px;">
         {{ siteInfo.blogName }}
       </el-menu-item>
       <el-menu-item id="searchItem" class="no-select">
         <header-search ref="HeaderSearch"></header-search>
       </el-menu-item>
-      <el-menu-item index="/home" class="no-select menu-item">首页</el-menu-item>
+      <el-menu-item index="/home/1" class="no-select menu-item">首页</el-menu-item>
       <el-submenu :show-timeout="100" :hide-timeout="100" index
                   class="no-select">
         <template slot="title"><span class="menu-item">分类</span></template>
@@ -23,9 +23,7 @@
                       :key="category.category_id"
         >
           <router-link
-              :to="{
-              name: 'category',
-              params: {cateId: category.category_id, cateName: category.category_name}}"
+              :to="{ path: `/category/${category.category_id}/1` }"
               tag="div"
           >{{ category.category_name }}
           </router-link>
@@ -38,7 +36,7 @@
 
 <script>
 import HeaderSearch from '@/components/header-search'
-import {fetchAllCategory} from "@/api";
+import {fetchAllCategory} from "@/api"
 
 export default {
   name: "layout-header",
@@ -95,10 +93,11 @@ export default {
       let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
       // console.log(scrollTop)
       if (scrollTop === 0) {
-        this.fixed = false;
+        this.fixed = false
+        this.hidden = false
       } else if (scrollTop >= this.lastScrollTop) {
-        this.fixed = false;
-        this.hidden = true;
+        this.fixed = false
+        this.hidden = true
       } else {
         this.fixed = true
         this.hidden = false

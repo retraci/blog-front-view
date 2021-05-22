@@ -19,7 +19,14 @@ export default {
     search() {
       console.log("in->search")
       console.log(this.searchValue)
-      this.$router.push({name: 'search', params: {words: this.searchValue}});
+      let data = {
+        name: 'search',
+        params: {
+          page: 1,
+          pageWord: this.searchValue
+        }
+      }
+      this.$router.push(data)
       this.close()
     },
     showInput() {
@@ -31,7 +38,7 @@ export default {
       }
     },
     close() {
-      console.log('in->close')
+      // console.log('in->close')
       this.$refs.searchInput && this.$refs.searchInput.blur()
       this.show = false
     }

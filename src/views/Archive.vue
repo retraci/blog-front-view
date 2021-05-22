@@ -1,19 +1,35 @@
 <template>
-  <div class="archive">
+  <div class="archive" v-if="archivePageShow">
     <el-row id="artList" type="flex" justify="space-around">
       <el-col :span="16">
         <el-row class="archive-title">文章归档</el-row>
+
         <el-row class="block animate">
-          <div>
+          <div v-for="(item, idx) in archives">
             <el-timeline>
               <el-timeline-item
-                  v-for="archive in archives"
+                  size="large"
+                  :type="idx === 0 ? 'success' : idx === 1 ? 'warning' : 'danger'"
+                  class="timeItem"
+                  icon="el-icon-more"
+              >
+                <el-tag class="month-tag"
+                        :type="idx === 0 ? 'success' : idx === 1 ? 'warning' : 'danger'">
+                  {{ item.month }}
+                </el-tag>
+              </el-timeline-item>
+
+              <el-timeline-item
+                  v-for="archive in item.arr"
                   v-bind:key="archive.blog_id"
                   size="large"
-                  type="primary"
+                  :type="idx === 0 ? 'success' : idx === 1 ? 'warning' : 'danger'"
                   class="timeItem"
               >
-                <el-tag class="date-tag" type="success"> {{ archive.blog_id }}</el-tag>
+                <el-tag class="day-tag"
+                        :type="idx === 0 ? 'success' : idx === 1 ? 'warning' : 'danger'">
+                  {{ archive.day }}
+                </el-tag>
                 <router-link
                     class="line-item"
                     :to="{name: 'article', params: {blogId: archive.blog_id}}"
@@ -23,6 +39,7 @@
               </el-timeline-item>
             </el-timeline>
           </div>
+
         </el-row>
       </el-col>
     </el-row>
@@ -31,17 +48,20 @@
 
 <script>
 import {fetchBlogArchive, fetchBlogsCount} from "@/api";
+import Element from "element-ui";
 
 export default {
   name: "archive",
   components: {},
   data() {
     return {
-      archives: {},
+      archives: [],
       currentPage: 1,
       pageSize: 999,
       total: 0,
-      blogcount: 0
+      blogcount: 0,
+
+      archivePageShow: false
     };
   },
   methods: {
@@ -58,7 +78,15 @@ export default {
         that.archives = res.data.data
         that.currentPage = res.data.currentPage
         that.total = res.data.totalPage
-      });
+
+        this.archivePageShow = true
+      }).catch(err => {
+        Element.Message({
+          message: err,
+          type: 'error',
+          duration: 2 * 1000
+        })
+      })
     },
     getBlogCnt() {
       const that = this
@@ -77,7 +105,14 @@ export default {
 
 <style lang="less">
 
-.date-tag {
+.month-tag {
+  margin-right: 15px;
+  height: 22px;
+  text-align: center;
+  line-height: 22px;
+}
+
+.day-tag {
   margin-right: 15px;
   width: 35px;
   height: 22px;

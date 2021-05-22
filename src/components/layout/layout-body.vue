@@ -1,6 +1,7 @@
 <template>
   <div id="layout-body">
-    <banner :site-info="siteInfo" v-if="true"></banner>
+    <banner :site-info="siteInfo" v-if="isHome"></banner>
+    <particles v-if="isNotArchive"></particles>
 
     <el-row type="flex" justify="center" id="content">
       <el-col :xs="20" :md="20" :style="{'minHeight':minHeight+'px'}">
@@ -15,18 +16,24 @@
 </template>
 
 <script>
-import Banner from "@/components/banner";
+import Banner from "@/components/banner"
+import Particles from "@/components/particles"
+import {mapState} from "vuex"
 
 export default {
   name: "layout-body",
   components: {
     Banner,
+    Particles
   },
   props: {
     siteInfo: {
       type: Object
     },
-    minHeight: Number
+    minHeight: Number,
+  },
+  computed: {
+    ...mapState(['isHome', 'isNotArchive'])
   },
   data() {
     return {
@@ -35,7 +42,7 @@ export default {
   mounted() {
   },
   created() {
-  }
+  },
 }
 </script>
 
